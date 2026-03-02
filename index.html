@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Manajemen Pesantren Ramadhan 1447 H</title>
+    <style>
+        :root { --primary: #059669; --bg: #f8fafc; --text: #1e293b; }
+        body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); margin: 0; padding-bottom: 50px; }
+        header { background: var(--primary); color: white; padding: 20px; text-align: center; }
+        .container { max-width: 1200px; margin: 20px auto; padding: 0 20px; }
+        .tabs { display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 2px solid #e2e8f0; padding-bottom: 10px; }
+        .tab-btn { padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer; background: #e2e8f0; font-weight: bold; }
+        .tab-btn.active { background: var(--primary); color: white; }
+        .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin-bottom: 20px; }
+        
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.85rem; }
+        th, td { border: 1px solid #e2e8f0; padding: 10px; text-align: left; }
+        th { background: #f1f5f9; }
+        
+        .btn { padding: 8px 15px; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; margin: 2px; }
+        .btn-add { background: #2563eb; color: white; }
+        .btn-del { background: #ef4444; color: white; padding: 4px 8px; font-size: 10px; }
+        .btn-print { background: #0f172a; color: white; width: 100%; margin-top: 10px; font-size: 1.1rem; padding: 15px; }
+        
+        input, select { padding: 6px; border: 1px solid #cbd5e1; border-radius: 4px; width: 90%; }
+        .fase-badge { padding: 2px 6px; border-radius: 4px; font-size: 10px; color: white; font-weight: bold; }
+        .fase-a { background: #db2777; } .fase-b { background: #7c3aed; } .fase-c { background: #2563eb; }
+        
+        @media print {
+            .tabs, .btn-add, .btn-del, .btn-print, header, .no-print { display: none !important; }
+            .card { box-shadow: none; border: none; padding: 0; }
+            body { background: white; }
+            table { font-size: 10pt; }
+            .print-only { display: block !important; text-align: center; margin-bottom: 20px; }
+        }
+        .print-only { display: none; }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>ADMINISTRASI PESANTREN RAMADHAN 1447 H</h1>
+    <p>Kabupaten Bandung | 05 - 13 Maret 2026 M</p>
+</header>
+
+<div class="container">
+    <div class="tabs">
+        <button class="tab-btn active" onclick="showTab('petugas')">👥 Kelola Petugas</button>
+        <button class="tab-btn" onclick="showTab('jadwal')">📅 Jadwal & Distribusi</button>
+        <button class="tab-btn" onclick="showTab('modul')">📖 Modul Ajar</button>
+    </div>
+
+    <div id="petugas" class="tab-content">
+        <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h2>Daftar Petugas Pesantren</h2>
+                <button class="btn btn-add" onclick="addRow()">+ Tambah Petugas</button>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nama Guru</th>
+                        <th>Kategori</th>
+                        <th>Fase/Tugas</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="tbodyPetugas">
+                    </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="jadwal" class="tab-content" style="display:none;">
+        <div class="print-only">
+            <h2>JADWAL PESANTREN RAMADHAN 1447 H</h2>
+            <p>SD KABUPATEN BANDUNG | 05-13 MARET 2026</p>
+        </div>
+        <div class="card">
+            <button class="btn btn-print" onclick="window.print()">🖨️ Cetak Jadwal / Simpan PDF</button>
+            <div id="renderJadwal"></div>
+        </div>
+    </div>
+
+    <div id="modul" class="tab-content" style="display:none;">
+        <div class="card">
+            <h2>Modul Ajar Lengkap (Berdasarkan Panduan)</h2>
+            <div id="listModul"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // DATA AWAL (Default)
+    let petugas = [
+        { nama: "Guru Kelas 1", tipe: "Guru Kelas", fase: "A" },
+        { nama: "Guru Kelas 2", tipe: "Guru Kelas", fase: "A" },
+        { nama: "Guru Kelas 3", tipe: "Guru Kelas", fase: "B" },
+        { nama: "Guru Kelas 4", tipe: "Guru Kelas", fase: "B" },
+        { nama: "Guru Kelas 5", tipe: "Guru Kelas", fase: "C" },
+        { nama: "Guru Kelas 6", tipe: "Guru Kelas", fase: "C" },
+        { nama: "Ust. Ngaji 1", tipe: "Guru Ngaji", fase: "A" },
+        { nama: "Ust. Ngaji 2", tipe: "Guru Ngaji", fase: "B" },
+        { nama: "Ust. Ngaji 3", tipe: "Guru Ngaji", fase: "C" },
+        { nama: "Guru PAI", tipe: "Guru Mapel", fase: "Semua" },
+        { nama: "Guru PJOK", tipe: "Guru Mapel", fase: "Semua" }
+    ];
+
+    const jadwalHarian = [
+        { tgl: "Kamis, 5 Mar", mat: "Akidah", fase: "A" },
+        { tgl: "Jumat, 6 Mar", mat: "Akhlak", fase: "B" },
+        { tgl: "Senin, 9 Mar", mat: "Fiqih", fase: "C" },
+        { tgl: "Selasa, 10 Mar", mat: "SPI", fase: "A" },
+        { tgl: "Rabu, 11 Mar", mat: "Akidah", fase: "B" },
+        { tgl: "Kamis, 12 Mar", mat: "Akhlak", fase: "C" },
+        { tgl: "Jumat, 13 Mar", mat: "Fanniyah", fase: "Semua" }
+    ];
+
+    function renderPetugas() {
+        const tbody = document.getElementById('tbodyPetugas');
+        tbody.innerHTML = '';
+        petugas.forEach((p, i) => {
+            tbody.innerHTML += `
+                <tr>
+                    <td><input value="${p.nama}" onchange="updateData(${i}, 'nama', this.value)"></td>
+                    <td>
+                        <select onchange="updateData(${i}, 'tipe', this.value)">
+                            <option ${p.tipe=='Guru Kelas'?'selected':''}>Guru Kelas</option>
+                            <option ${p.tipe=='Guru Ngaji'?'selected':''}>Guru Ngaji</option>
+                            <option ${p.tipe=='Guru Mapel'?'selected':''}>Guru Mapel</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select onchange="updateData(${i}, 'fase', this.value)">
+                            <option ${p.fase=='A'?'selected':''}>A</option>
+                            <option ${p.fase=='B'?'selected':''}>B</option>
+                            <option ${p.fase=='C'?'selected':''}>C</option>
+                            <option ${p.fase=='Semua'?'selected':''}>Semua</option>
+                        </select>
+                    </td>
+                    <td><button class="btn btn-del" onclick="removeRow(${i})">Hapus</button></td>
+                </tr>
+            `;
+        });
+        buildJadwal();
+    }
+
+    function addRow() {
+        petugas.push({ nama: "Petugas Baru", tipe: "Guru Kelas", fase: "A" });
+        renderPetugas();
+    }
+
+    function removeRow(i) {
+        petugas.splice(i, 1);
+        renderPetugas();
+    }
+
+    function updateData(i, field, val) {
+        petugas[i][field] = val;
+        buildJadwal();
+    }
+
+    function buildJadwal() {
+        const div = document.getElementById('renderJadwal');
+        let html = '';
+        
+        const faseList = ['A', 'B', 'C'];
+        
+        faseList.forEach(f => {
+            html += `<h3>FASE ${f} (Kelas ${f=='A'?'1-2':f=='B'?'3-4':'5-6'})</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Hari/Tanggal</th>
+                        <th>Waktu</th>
+                        <th>Kegiatan</th>
+                        <th>Penyampai (Materi)</th>
+                        <th>Pembimbing (Ngaji)</th>
+                    </tr>
+                </thead>
+                <tbody>`;
+            
+            jadwalHarian.forEach((j, idx) => {
+                // Filter Guru Kelas sesuai Fase
+                const listGK = petugas.filter(p => p.fase === f && p.tipe === 'Guru Kelas');
+                const listGN = petugas.filter(p => p.fase === f && p.tipe === 'Guru Ngaji');
+                const listGM = petugas.filter(p => p.tipe === 'Guru Mapel');
+
+                // Bergantian (Rolling)
+                const gKelas = listGK.length > 0 ? listGK[idx % listGK.length].nama : "Belum diatur";
+                const gNgaji = listGN.length > 0 ? listGN[idx % listGN.length].nama : "Belum diatur";
+                const gMapel = listGM.length > 0 ? listGM[idx % listGM.length].nama : "-";
+
+                html += `
+                    <tr>
+                        <td rowspan="2"><b>${j.tgl}</b></td>
+                        <td>07.30 - 09.15</td>
+                        <td>Dhuha & <b>Mengaji</b></td>
+                        <td>-</td>
+                        <td><span class="fase-badge fase-${f.toLowerCase()}">${gNgaji}</span></td>
+                    </tr>
+                    <tr>
+                        <td>09.15 - 10.00</td>
+                        <td>Materi: ${j.mat}</td>
+                        <td><b>${gKelas}</b> & ${gMapel}</td>
+                        <td>-</td>
+                    </tr>
+                `;
+            });
+            html += `</tbody></table><br>`;
+        });
+        div.innerHTML = html;
+    }
+
+    function showTab(id) {
+        document.querySelectorAll('.tab-content').forEach(t => t.style.display = 'none');
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.getElementById(id).style.display = 'block';
+        event.currentTarget.classList.add('active');
+    }
+
+    window.onload = () => {
+        renderPetugas();
+        document.getElementById('listModul').innerHTML = `
+            <h3>Modul Akidah (Fase A/B/C)</h3>
+            <p><b>Materi:</b> Allah Maha Baik (Ar-Rahman). Menanamkan rasa cinta melalui nikmat tubuh dan alam.</p>
+            <p><b>Langkah:</b> 1. Dhuha 2. Ngaji 15 Menit 3. Cerita Kisah Nabi 4. Diskusi Kelompok.</p>
+            <hr>
+            <h3>Modul Akhlak</h3>
+            <p><b>Materi:</b> Adab Berbicara. Praktik kata Maaf, Tolong, Terima Kasih.</p>
+        `;
+    };
+</script>
+
+</body>
+</html>
