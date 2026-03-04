@@ -110,7 +110,6 @@
         .btn-print { background: #0f172a; color: white; width: 100%; margin-top: 15px; font-size: 1.1rem; padding: 15px; }
         .btn-download { background: var(--primary); color: white; }
         .btn-login { background: var(--warning); color: white; }
-        .btn-logout { background: var(--danger); color: white; }
         .btn-reset { background: #6b7280; color: white; }
         
         input, select, textarea { 
@@ -137,18 +136,37 @@
         .fase-a { background: #db2777; } 
         .fase-b { background: #7c3aed; } 
         .fase-c { background: #2563eb; }
-        .fase-semua { background: #059669; }
+        
+        .tipe-badge {
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        .tipe-kelas { background: #dbeafe; color: #1e40af; }
+        .tipe-ngaji { background: #dcfce7; color: #166534; }
+        .tipe-pai { background: #fef3c7; color: #92400e; }
+        .tipe-pjok { background: #fce7f3; color: #9d174d; }
         
         .conflict-warning {
-            background: #fef3c7;
-            border: 2px solid var(--warning);
-            color: #92400e;
+            background: #fef2f2;
+            border: 2px solid var(--danger);
+            color: #991b1b;
             padding: 12px 15px;
             border-radius: 8px;
             margin: 10px 0;
             display: flex;
             align-items: center;
             gap: 10px;
+        }
+        
+        .no-conflict {
+            background: #dcfce7;
+            border: 2px solid #22c55e;
+            color: #166534;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin: 10px 0;
         }
         
         .login-modal {
@@ -181,18 +199,12 @@
             padding: 20px;
             margin-bottom: 20px;
         }
-        .modul-section h4 { 
-            margin: 0 0 15px 0; 
-            color: var(--primary-dark);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
         .modul-content { 
             background: white; 
             padding: 20px; 
             border-radius: 10px;
             border-left: 4px solid var(--primary);
+            margin-top: 15px;
         }
         .modul-content h5 { margin: 15px 0 8px 0; color: #374151; }
         .modul-content p { margin: 5px 0; color: #4b5563; }
@@ -238,15 +250,11 @@
             text-align: center;
         }
         
-        .schedule-grid {
-            display: grid;
-            gap: 20px;
-        }
-        
         .fase-section {
             border: 2px solid #e2e8f0;
             border-radius: 12px;
             overflow: hidden;
+            margin-bottom: 20px;
         }
         .fase-header {
             padding: 15px 20px;
@@ -258,35 +266,74 @@
         .fase-header.fase-b { background: linear-gradient(135deg, #7c3aed, #6d28d9); }
         .fase-header.fase-c { background: linear-gradient(135deg, #2563eb, #1d4ed8); }
         
-        .libur-badge {
-            background: #fee2e2;
-            color: #991b1b;
-            padding: 4px 10px;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-        
         .hari-info {
             display: flex;
             flex-wrap: wrap;
-            gap: 5px;
+            gap: 3px;
             margin-top: 5px;
         }
         .hari-chip {
             background: #e2e8f0;
-            padding: 2px 8px;
+            padding: 2px 6px;
             border-radius: 4px;
-            font-size: 0.7rem;
+            font-size: 0.65rem;
+            min-width: 18px;
+            text-align: center;
         }
         .hari-chip.active {
             background: var(--primary);
             color: white;
         }
         
+        .guru-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+        .guru-item {
+            background: #f1f5f9;
+            padding: 3px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+        
+        .summary-box {
+            background: #f0f9ff;
+            border: 1px solid #bae6fd;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+        }
+        .summary-box h4 { margin: 0 0 10px 0; color: #0369a1; }
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+        }
+        .summary-item {
+            background: white;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .summary-item .number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .info-box {
+            background: #eff6ff;
+            border: 1px solid #bfdbfe;
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+            font-size: 0.9rem;
+        }
+        
         @media print {
             .tabs, .btn-add, .btn-del, .btn-print, .btn-download, header, .no-print, 
-            .readonly-notice, .admin-badge, .status-saved { display: none !important; }
+            .readonly-notice, .admin-badge, .status-saved, .info-box { display: none !important; }
             .card { box-shadow: none; border: 1px solid #ccc; padding: 15px; }
             body { background: white; font-size: 11pt; }
             table { font-size: 9pt; }
@@ -298,8 +345,8 @@
         @media (max-width: 768px) {
             .tabs { flex-direction: column; }
             .tab-btn { text-align: center; }
-            table { font-size: 0.8rem; }
-            th, td { padding: 8px 5px; }
+            table { font-size: 0.75rem; }
+            th, td { padding: 6px 4px; }
             .admin-badge { position: static; margin-bottom: 10px; display: block; text-align: center; }
             header { padding-top: 15px; }
         }
@@ -324,7 +371,7 @@
     </div>
     <h1>📿 ADMINISTRASI PESANTREN RAMADHAN 1447 H</h1>
     <p>SD Kabupaten Bandung | 05 - 13 Maret 2026 M (05 - 13 Ramadhan 1447 H)</p>
-    <p style="font-size: 0.85rem; opacity: 0.8; margin-top: 5px;">📅 7 Hari Efektif (Sabtu & Minggu Libur)</p>
+    <p style="font-size: 0.85rem; opacity: 0.8; margin-top: 5px;">📅 7 Hari Efektif (Sabtu & Minggu Libur) | ⚠️ Anti Bentrok</p>
 </header>
 
 <div class="container">
@@ -344,36 +391,60 @@
     <div id="dashboard" class="tab-content">
         <div class="card">
             <h2>📊 Ringkasan Pesantren Ramadhan</h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 20px;">
-                <div style="background: linear-gradient(135deg, #db2777, #be185d); color: white; padding: 25px; border-radius: 12px; text-align: center;">
-                    <div style="font-size: 2.5rem; font-weight: 700;" id="countFaseA">0</div>
-                    <div>Petugas Fase A</div>
-                    <div style="font-size: 0.85rem; opacity: 0.8;">Kelas 1-2</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin-top: 20px;">
+                <div style="background: linear-gradient(135deg, #db2777, #be185d); color: white; padding: 20px; border-radius: 12px; text-align: center;">
+                    <div style="font-size: 2rem; font-weight: 700;" id="countFaseA">0</div>
+                    <div style="font-size: 0.85rem;">Petugas Fase A</div>
+                    <div style="font-size: 0.7rem; opacity: 0.8;">Kelas 1-2</div>
                 </div>
-                <div style="background: linear-gradient(135deg, #7c3aed, #6d28d9); color: white; padding: 25px; border-radius: 12px; text-align: center;">
-                    <div style="font-size: 2.5rem; font-weight: 700;" id="countFaseB">0</div>
-                    <div>Petugas Fase B</div>
-                    <div style="font-size: 0.85rem; opacity: 0.8;">Kelas 3-4</div>
+                <div style="background: linear-gradient(135deg, #7c3aed, #6d28d9); color: white; padding: 20px; border-radius: 12px; text-align: center;">
+                    <div style="font-size: 2rem; font-weight: 700;" id="countFaseB">0</div>
+                    <div style="font-size: 0.85rem;">Petugas Fase B</div>
+                    <div style="font-size: 0.7rem; opacity: 0.8;">Kelas 3-4</div>
                 </div>
-                <div style="background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; padding: 25px; border-radius: 12px; text-align: center;">
-                    <div style="font-size: 2.5rem; font-weight: 700;" id="countFaseC">0</div>
-                    <div>Petugas Fase C</div>
-                    <div style="font-size: 0.85rem; opacity: 0.8;">Kelas 5-6</div>
+                <div style="background: linear-gradient(135deg, #2563eb, #1d4ed8); color: white; padding: 20px; border-radius: 12px; text-align: center;">
+                    <div style="font-size: 2rem; font-weight: 700;" id="countFaseC">0</div>
+                    <div style="font-size: 0.85rem;">Petugas Fase C</div>
+                    <div style="font-size: 0.7rem; opacity: 0.8;">Kelas 5-6</div>
                 </div>
-                <div style="background: linear-gradient(135deg, #059669, #047857); color: white; padding: 25px; border-radius: 12px; text-align: center;">
-                    <div style="font-size: 2.5rem; font-weight: 700;" id="countTotal">0</div>
-                    <div>Total Petugas</div>
-                    <div style="font-size: 0.85rem; opacity: 0.8;">Semua Fase</div>
+                <div style="background: linear-gradient(135deg, #059669, #047857); color: white; padding: 20px; border-radius: 12px; text-align: center;">
+                    <div style="font-size: 2rem; font-weight: 700;" id="countTotal">0</div>
+                    <div style="font-size: 0.85rem;">Total Petugas</div>
+                    <div style="font-size: 0.7rem; opacity: 0.8;">Unique</div>
+                </div>
+            </div>
+            
+            <div class="summary-box" style="margin-top: 20px;">
+                <h4>📋 Rincian Petugas per Kategori</h4>
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <div class="number" id="countGuruKelas">0</div>
+                        <div style="font-size: 0.8rem;">Guru Kelas</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="number" id="countGuruNgaji">0</div>
+                        <div style="font-size: 0.8rem;">Guru Ngaji</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="number" id="countGuruPAI">0</div>
+                        <div style="font-size: 0.8rem;">Guru PAI</div>
+                    </div>
+                    <div class="summary-item">
+                        <div class="number" id="countGuruPJOK">0</div>
+                        <div style="font-size: 0.8rem;">Guru PJOK</div>
+                    </div>
                 </div>
             </div>
         </div>
         
         <div class="card">
             <h2>📅 Jadwal Pelaksanaan (7 Hari Efektif)</h2>
-            <p style="color: #6b7280; margin-bottom: 15px;">⚠️ Sabtu & Minggu Libur</p>
+            <div class="info-box">
+                <strong>⚠️ Aturan Anti Bentrok:</strong> Seorang petugas TIDAK BOLEH mengajar di 2 rombel/fase berbeda pada tanggal yang sama.
+            </div>
             <table>
                 <tr>
-                    <th>Hari Ke-</th>
+                    <th>Hari</th>
                     <th>Tanggal</th>
                     <th>Hari</th>
                     <th>Materi</th>
@@ -381,8 +452,7 @@
                 </tr>
                 <tr><td>1</td><td>05 Maret 2026</td><td>Kamis</td><td>Akidah</td><td>07:30 - 10:00</td></tr>
                 <tr><td>2</td><td>06 Maret 2026</td><td>Jumat</td><td>Akhlak</td><td>07:30 - 10:00</td></tr>
-                <tr style="background: #fee2e2;"><td colspan="5" style="text-align: center;"><span class="libur-badge">🏠 LIBUR - Sabtu, 07 Maret 2026</span></td></tr>
-                <tr style="background: #fee2e2;"><td colspan="5" style="text-align: center;"><span class="libur-badge">🏠 LIBUR - Minggu, 08 Maret 2026</span></td></tr>
+                <tr style="background: #fee2e2;"><td colspan="5" style="text-align: center; color: #991b1b;">🏠 LIBUR - Sabtu & Minggu (07-08 Maret)</td></tr>
                 <tr><td>3</td><td>09 Maret 2026</td><td>Senin</td><td>Fiqih</td><td>07:30 - 10:00</td></tr>
                 <tr><td>4</td><td>10 Maret 2026</td><td>Selasa</td><td>SPI (Sejarah)</td><td>07:30 - 10:00</td></tr>
                 <tr><td>5</td><td>11 Maret 2026</td><td>Rabu</td><td>Al-Qur'an</td><td>07:30 - 10:00</td></tr>
@@ -406,15 +476,10 @@
                 </div>
             </div>
             
-            <div style="background: #f0f9ff; border: 1px solid #bae6fd; padding: 12px 15px; border-radius: 8px; margin: 15px 0;">
+            <div class="info-box">
                 <strong>📌 Keterangan Hari:</strong> 
-                1 = Kamis (5/3), 
-                2 = Jumat (6/3), 
-                3 = Senin (9/3), 
-                4 = Selasa (10/3), 
-                5 = Rabu (11/3), 
-                6 = Kamis (12/3), 
-                7 = Jumat (13/3)
+                1=Kamis(5/3), 2=Jumat(6/3), 3=Senin(9/3), 4=Selasa(10/3), 5=Rabu(11/3), 6=Kamis(12/3), 7=Jumat(13/3)
+                <br><small>💡 Format input: "1,2,3,4" atau "1-4" | ⚠️ Satu guru hanya boleh di 1 fase per hari!</small>
             </div>
             
             <div id="conflictWarnings"></div>
@@ -422,12 +487,12 @@
             <table>
                 <thead>
                     <tr>
-                        <th style="width: 5%;">No</th>
-                        <th style="width: 25%;">Nama Guru</th>
-                        <th style="width: 15%;">Kategori</th>
-                        <th style="width: 10%;">Fase</th>
-                        <th style="width: 25%;">Jadwal Hari (1-7)</th>
-                        <th style="width: 15%;" class="admin-only">Aksi</th>
+                        <th style="width: 4%;">No</th>
+                        <th style="width: 22%;">Nama Guru</th>
+                        <th style="width: 12%;">Kategori</th>
+                        <th style="width: 8%;">Fase</th>
+                        <th style="width: 22%;">Jadwal Hari</th>
+                        <th style="width: 12%;" class="admin-only">Aksi</th>
                     </tr>
                 </thead>
                 <tbody id="tbodyPetugas"></tbody>
@@ -439,7 +504,7 @@
     <div id="jadwal" class="tab-content" style="display:none;">
         <div class="print-only">
             <h2>JADWAL PESANTREN RAMADHAN 1447 H</h2>
-            <p>SD KABUPATEN BANDUNG | 05-13 MARET 2026 (Sabtu & Minggu Libur)</p>
+            <p>SD KABUPATEN BANDUNG | 05-13 MARET 2026</p>
             <hr>
         </div>
         <div class="card">
@@ -447,8 +512,8 @@
                 <h2 style="margin: 0;">📅 Jadwal Lengkap & Distribusi Tugas</h2>
                 <button class="btn btn-print no-print" onclick="window.print()">🖨️ Cetak / Simpan PDF</button>
             </div>
-            <p style="color: #6b7280;">⚠️ Jadwal 7 hari efektif (Sabtu & Minggu Libur)</p>
-            <div id="renderJadwal" class="schedule-grid" style="margin-top: 20px;"></div>
+            <div id="conflictWarningsJadwal"></div>
+            <div id="renderJadwal" style="margin-top: 20px;"></div>
         </div>
     </div>
 
@@ -463,8 +528,8 @@
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
                 <h2 style="margin: 0;">📖 Modul Ajar Lengkap</h2>
                 <div>
-                    <button class="btn btn-download" onclick="downloadAllModul()">📥 Download Semua Modul</button>
-                    <button class="btn btn-print no-print" onclick="window.print()">🖨️ Cetak Modul</button>
+                    <button class="btn btn-download" onclick="downloadAllModul()">📥 Download Modul</button>
+                    <button class="btn btn-print no-print" onclick="window.print()">🖨️ Cetak</button>
                 </div>
             </div>
             
@@ -486,17 +551,14 @@
 <script>
     // ==================== KONFIGURASI ====================
     const ADMIN_PASSWORD = "admin123";
-    const STORAGE_KEY = "pesantrenRamadhan1447_v2";
+    const STORAGE_KEY = "pesantrenRamadhan1447_v4";
     
     let isAdmin = false;
     
     // ==================== DATA STRUKTUR ====================
-    // Jadwal 7 hari efektif (Sabtu & Minggu Libur)
     const jadwalHarian = [
         { no: 1, tgl: "Kamis, 5 Maret", tanggal: "05/03/2026", materi: "Akidah" },
         { no: 2, tgl: "Jumat, 6 Maret", tanggal: "06/03/2026", materi: "Akhlak" },
-        // Sabtu 7 Maret - LIBUR
-        // Minggu 8 Maret - LIBUR
         { no: 3, tgl: "Senin, 9 Maret", tanggal: "09/03/2026", materi: "Fiqih" },
         { no: 4, tgl: "Selasa, 10 Maret", tanggal: "10/03/2026", materi: "SPI" },
         { no: 5, tgl: "Rabu, 11 Maret", tanggal: "11/03/2026", materi: "Al-Qur'an" },
@@ -504,23 +566,67 @@
         { no: 7, tgl: "Jumat, 13 Maret", tanggal: "13/03/2026", materi: "Fanniyah & Penutupan" }
     ];
 
+    /*
+    DISTRIBUSI PETUGAS (16 orang unique):
+    - 6 Guru Kelas: 2 per fase (tetap di fasenya)
+    - 7 Guru Ngaji: distribusi per fase
+    - 2 Guru PAI: rotasi 3 fase (tidak boleh 2 fase di hari sama)
+    - 1 Guru PJOK: rotasi 3 fase
+    
+    ROTASI GURU PAI & PJOK (Anti Bentrok):
+    Hari 1: PAI1→A, PAI2→B, PJOK→C
+    Hari 2: PAI1→B, PAI2→C, PJOK→A
+    Hari 3: PAI1→C, PAI2→A, PJOK→B
+    Hari 4: PAI1→A, PAI2→B, PJOK→C
+    Hari 5: PAI1→B, PAI2→C, PJOK→A
+    Hari 6: PAI1→C, PAI2→A, PJOK→B
+    Hari 7: PAI1→A, PAI2→B, PJOK→C
+    */
+    
     const defaultPetugas = [
-        { nama: "Ustadzah Fatimah", tipe: "Guru Kelas", fase: "A", hari: [1,2,3,4] },
-        { nama: "Ustadzah Aisyah", tipe: "Guru Kelas", fase: "A", hari: [5,6,7] },
-        { nama: "Ustadz Ahmad", tipe: "Guru Kelas", fase: "B", hari: [1,2,3,4] },
-        { nama: "Ustadzah Khadijah", tipe: "Guru Kelas", fase: "B", hari: [5,6,7] },
-        { nama: "Ustadz Umar", tipe: "Guru Kelas", fase: "C", hari: [1,2,3,4] },
-        { nama: "Ustadz Ali", tipe: "Guru Kelas", fase: "C", hari: [5,6,7] },
+        // ========== 6 GURU KELAS (2 per fase, tetap) ==========
+        { nama: "Ustadzah Fatimah", tipe: "Guru Kelas", fase: "A", hari: [1,2,3,4,5,6,7] },
+        { nama: "Ustadzah Aisyah", tipe: "Guru Kelas", fase: "A", hari: [1,2,3,4,5,6,7] },
+        { nama: "Ustadz Ahmad", tipe: "Guru Kelas", fase: "B", hari: [1,2,3,4,5,6,7] },
+        { nama: "Ustadzah Khadijah", tipe: "Guru Kelas", fase: "B", hari: [1,2,3,4,5,6,7] },
+        { nama: "Ustadz Umar", tipe: "Guru Kelas", fase: "C", hari: [1,2,3,4,5,6,7] },
+        { nama: "Ustadz Ali", tipe: "Guru Kelas", fase: "C", hari: [1,2,3,4,5,6,7] },
+        
+        // ========== 7 GURU NGAJI ==========
+        // Fase A: 3 guru (2 utama + 1 rotasi)
         { nama: "Ustadz Hamzah", tipe: "Guru Ngaji", fase: "A", hari: [1,2,3,4,5,6,7] },
-        { nama: "Ustadz Bilal", tipe: "Guru Ngaji", fase: "B", hari: [1,2,3,4,5,6,7] },
-        { nama: "Ustadz Zaid", tipe: "Guru Ngaji", fase: "C", hari: [1,2,3,4,5,6,7] },
-        { nama: "Ustadz Salman (PAI)", tipe: "Guru Mapel", fase: "Semua", hari: [1,3,5,7] },
-        { nama: "Ustadz Khalid (Olahraga)", tipe: "Guru Mapel", fase: "Semua", hari: [2,4,6] }
+        { nama: "Ustadz Bilal", tipe: "Guru Ngaji", fase: "A", hari: [1,2,3,4,5,6,7] },
+        // Fase B: 2 guru
+        { nama: "Ustadz Zaid", tipe: "Guru Ngaji", fase: "B", hari: [1,2,3,4,5,6,7] },
+        { nama: "Ustadz Muadz", tipe: "Guru Ngaji", fase: "B", hari: [1,2,3,4,5,6,7] },
+        // Fase C: 2 guru
+        { nama: "Ustadz Ubay", tipe: "Guru Ngaji", fase: "C", hari: [1,2,3,4,5,6,7] },
+        { nama: "Ustadz Salim", tipe: "Guru Ngaji", fase: "C", hari: [1,2,3,4,5,6,7] },
+        // Guru Ngaji ke-7: Rotasi sebagai tambahan
+        { nama: "Ustadzah Ruqayyah", tipe: "Guru Ngaji", fase: "A", hari: [1,2] },
+        { nama: "Ustadzah Ruqayyah", tipe: "Guru Ngaji", fase: "B", hari: [3,4] },
+        { nama: "Ustadzah Ruqayyah", tipe: "Guru Ngaji", fase: "C", hari: [5,6,7] },
+        
+        // ========== 2 GURU PAI (Rotasi anti bentrok) ==========
+        // PAI 1: A(1,4,7), B(2,5), C(3,6)
+        { nama: "Ustadz Salman (PAI)", tipe: "Guru PAI", fase: "A", hari: [1,4,7] },
+        { nama: "Ustadz Salman (PAI)", tipe: "Guru PAI", fase: "B", hari: [2,5] },
+        { nama: "Ustadz Salman (PAI)", tipe: "Guru PAI", fase: "C", hari: [3,6] },
+        // PAI 2: B(1,4,7), C(2,5), A(3,6)
+        { nama: "Ustadz Khalid (PAI)", tipe: "Guru PAI", fase: "B", hari: [1,4,7] },
+        { nama: "Ustadz Khalid (PAI)", tipe: "Guru PAI", fase: "C", hari: [2,5] },
+        { nama: "Ustadz Khalid (PAI)", tipe: "Guru PAI", fase: "A", hari: [3,6] },
+        
+        // ========== 1 GURU PJOK (Rotasi anti bentrok) ==========
+        // PJOK: C(1,4,7), A(2,5), B(3,6)
+        { nama: "Ustadz Rahman (PJOK)", tipe: "Guru PJOK", fase: "C", hari: [1,4,7] },
+        { nama: "Ustadz Rahman (PJOK)", tipe: "Guru PJOK", fase: "A", hari: [2,5] },
+        { nama: "Ustadz Rahman (PJOK)", tipe: "Guru PJOK", fase: "B", hari: [3,6] }
     ];
 
     let petugas = [];
 
-    // ==================== MODUL AJAR LENGKAP ====================
+    // ==================== MODUL AJAR ====================
     const modulAjar = {
         A: {
             nama: "Fase A (Kelas 1-2)",
@@ -529,630 +635,134 @@
                 akidah: {
                     judul: "Allah Maha Baik (Ar-Rahman dan Ar-Rahim)",
                     hari: "Hari 1 - Kamis, 5 Maret 2026",
-                    tujuan: [
-                        "Meyakini bahwa Allah Maha Baik dan Maha Pengasih",
-                        "Menyebutkan contoh kebaikan Allah dalam kehidupan sehari-hari",
-                        "Menunjukkan rasa cinta kepada Allah melalui sikap dan ibadah"
-                    ],
-                    dalil: {
-                        arab: "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ",
-                        arti: "Dengan nama Allah Yang Maha Pengasih lagi Maha Penyayang. (QS. Al-Fatihah: 1)"
-                    },
-                    dalil2: {
-                        arab: "وَاِنْ تَعُدُّوْا نِعْمَةَ اللهِ لَا تُحْصُوْهَا اِنَّ اللهَ لَغَفُوْرٌ رَّحِيْمٌ",
-                        arti: "Jika kamu menghitung nikmat Allah, niscaya kamu tidak akan mampu menghitungnya. Sesungguhnya Allah benar-benar Maha Pengampun lagi Maha Penyayang. (QS. An-Nahl: 18)"
-                    },
-                    isi: [
-                        "Ar-Rahman artinya Allah Maha Pengasih kepada semua makhluk",
-                        "Ar-Rahim artinya Allah Maha Penyayang kepada orang yang beriman",
-                        "Bukti kebaikan Allah: memberi mata, udara, keluarga, makanan, sekolah",
-                        "Cara mencintai Allah: taat beribadah dan selalu berbuat baik"
-                    ],
-                    aktivitas: [
-                        "Menggambar Nikmat: Anak menggambar hal yang paling mereka syukuri",
-                        "Game Syukur: Menyebutkan 5 nikmat Allah yang dirasakan hari ini",
-                        "Hafalan: Menghafal Ar-Rahman dan Ar-Rahim beserta artinya"
-                    ],
-                    pesan: "Allah Maha Baik kepadaku setiap waktu. Aku mencintai Allah dengan taat dan selalu berbuat baik.",
-                    doa: "Ya Allah, Engkau Maha Baik. Terima kasih atas semua nikmat-Mu. Jadikanlah aku anak yang taat dan selalu mencintai-Mu. Amin."
+                    tujuan: ["Meyakini bahwa Allah Maha Baik dan Maha Pengasih", "Menyebutkan contoh kebaikan Allah", "Menunjukkan rasa cinta kepada Allah"],
+                    dalil: { arab: "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ", arti: "Dengan nama Allah Yang Maha Pengasih lagi Maha Penyayang. (QS. Al-Fatihah: 1)" },
+                    isi: ["Ar-Rahman: Maha Pengasih kepada semua makhluk", "Ar-Rahim: Maha Penyayang kepada orang beriman", "Bukti kebaikan Allah: mata, udara, keluarga, makanan"],
+                    aktivitas: ["Menggambar Nikmat", "Game Syukur: 5 nikmat Allah hari ini", "Hafalan Ar-Rahman & Ar-Rahim"],
+                    pesan: "Allah Maha Baik kepadaku setiap waktu.",
+                    doa: "Ya Allah, Engkau Maha Baik. Terima kasih atas semua nikmat-Mu. Amin."
                 },
                 akhlak: {
                     judul: "Berbicara Baik dan Sopan kepada Orang Tua & Guru",
                     hari: "Hari 2 - Jumat, 6 Maret 2026",
-                    tujuan: [
-                        "Memahami pentingnya menjaga lisan kepada orang tua dan guru",
-                        "Menyebutkan dan mempraktikkan contoh kalimat sopan",
-                        "Membiasakan adab berbicara yang baik dalam kehidupan sehari-hari"
-                    ],
-                    dalil: {
-                        arab: "فَلَا تَقُلْ لَّهُمَآ اُفٍّ وَّلَا تَنْهَرْهُمَا وَقُلْ لَّهُمَا قَوْلًا كَرِيْمًا",
-                        arti: "Maka sekali-kali janganlah engkau mengatakan kepada keduanya perkataan 'ah' dan janganlah engkau membentak keduanya, serta ucapkanlah kepada keduanya perkataan yang baik. (QS. Al-Isra: 23)"
-                    },
-                    dalil2: {
-                        arab: "مَنْ كَانَ يُؤْمِنُ بِاللَّهِ وَالْيَوْمِ الْآخِرِ فَلْيَقُلْ خَيْرًا أَوْ لِيَصْمُتْ",
-                        arti: "Barangsiapa yang beriman kepada Allah dan hari akhir maka berkatalah yang baik atau diam. (HR. Bukhari-Muslim)"
-                    },
-                    isi: [
-                        "Berbicara baik: menggunakan kata-kata lembut, nada suara pelan",
-                        "Tidak membentak dan tidak memotong pembicaraan",
-                        "Menggunakan panggilan sopan: Ibu, Ayah, Pak Guru, Bu Guru",
-                        "3 Kata Ajaib: Maaf, Tolong, dan Terima Kasih"
-                    ],
-                    aktivitas: [
-                        "Role Play: Praktik menjawab panggilan guru dan meminta izin dengan sopan",
-                        "Tantangan: Satu hari tanpa membentak",
-                        "Latihan 3 Kata Ajaib: Maaf, Tolong, Terima Kasih"
-                    ],
-                    pesan: "Lisan yang baik adalah tanda anak yang shalih dan shalihah.",
-                    doa: "Ya Allah, lembutkanlah lisanku. Jadikanlah aku anak yang sopan kepada orang tua dan guruku. Berikanlah keberkahan dalam hidup dan ilmuku. Amin."
+                    tujuan: ["Memahami pentingnya menjaga lisan", "Mempraktikkan contoh kalimat sopan", "Membiasakan adab berbicara yang baik"],
+                    dalil: { arab: "فَلَا تَقُلْ لَّهُمَآ اُفٍّ وَّلَا تَنْهَرْهُمَا وَقُلْ لَّهُمَا قَوْلًا كَرِيْمًا", arti: "Janganlah mengatakan 'ah' dan membentak, ucapkanlah perkataan yang baik. (QS. Al-Isra: 23)" },
+                    isi: ["Kata-kata lembut, nada pelan", "Panggilan sopan: Ibu, Ayah, Pak/Bu Guru", "3 Kata Ajaib: Maaf, Tolong, Terima Kasih"],
+                    aktivitas: ["Role Play: menjawab panggilan guru", "Tantangan: Sehari tanpa membentak"],
+                    pesan: "Lisan yang baik adalah tanda anak yang shalih.",
+                    doa: "Ya Allah, lembutkanlah lisanku. Amin."
                 },
                 fiqih: {
                     judul: "Belajar Puasa Ramadhan dengan Hati Gembira",
                     hari: "Hari 3 - Senin, 9 Maret 2026",
-                    tujuan: [
-                        "Memahami arti puasa Ramadhan secara sederhana",
-                        "Menyebutkan syarat dan waktu pelaksanaan puasa",
-                        "Melaksanakan puasa dengan semangat dan hati yang senang"
-                    ],
-                    dalil: {
-                        arab: "يٰٓاَيُّهَا الَّذِيْنَ اٰمَنُوْا كُتِبَ عَلَيْكُمُ الصِّيَامُ كَمَا كُتِبَ عَلَى الَّذِيْنَ مِنْ قَبْلِكُمْ لَعَلَّكُمْ تَتَّقُوْنَ",
-                        arti: "Wahai orang-orang yang beriman, diwajibkan atas kamu berpuasa sebagaimana diwajibkan atas orang-orang sebelum kamu agar kamu bertakwa. (QS. Al-Baqarah: 183)"
-                    },
-                    dalil2: {
-                        arab: "لِلصَّائِمِ فَرْحَتَانِ: فَرْحَةٌ عِنْدَ فِطْرِهِ، وَفَرْحَةٌ عِنْدَ لِقَاءِ رَبِّهِ",
-                        arti: "Bagi orang yang berpuasa ada dua kegembiraan: kegembiraan ketika berbuka puasa, dan kegembiraan ketika bertemu Tuhannya. (HR. Bukhari & Muslim)"
-                    },
-                    isi: [
-                        "Puasa adalah menahan diri dari makan, minum, dan hal buruk",
-                        "Waktu puasa: dari terbit fajar (Subuh) sampai terbenam matahari (Maghrib)",
-                        "Mengapa puasa? Belajar sabar, berbagi rasa, dekat dengan Allah",
-                        "Tips puasa ceria: sahur berkualitas, istirahat cukup, sibuk dalam kebaikan"
-                    ],
-                    aktivitas: [
-                        "Pohon Ramadhan: Menempelkan stiker setiap berhasil puasa",
-                        "Jurnal Puasa Ceria: Menggambar emoticon perasaan hari ini",
-                        "Role Play: Cara menolak ajakan makan saat puasa dengan sopan"
-                    ],
-                    pesan: "Puasa adalah latihan menjadi anak hebat dan tangguh.",
-                    doa: "Ya Allah, jadikanlah puasa kami penuh kegembiraan. Kuatkanlah kami untuk selalu sabar dan taat. Terimalah ibadah puasa kami ya Allah. Amin."
+                    tujuan: ["Memahami arti puasa", "Menyebutkan waktu puasa", "Melaksanakan puasa dengan senang"],
+                    dalil: { arab: "يٰٓاَيُّهَا الَّذِيْنَ اٰمَنُوْا كُتِبَ عَلَيْكُمُ الصِّيَامُ", arti: "Wahai orang beriman, diwajibkan puasa agar kamu bertakwa. (QS. Al-Baqarah: 183)" },
+                    isi: ["Puasa: menahan makan, minum, dan hal buruk", "Waktu: Subuh sampai Maghrib", "Tips ceria: sahur berkualitas, istirahat cukup"],
+                    aktivitas: ["Pohon Ramadhan: tempel stiker", "Jurnal Puasa Ceria"],
+                    pesan: "Puasa adalah latihan menjadi anak hebat.",
+                    doa: "Ya Allah, jadikanlah puasa kami penuh kegembiraan. Amin."
                 },
                 spi: {
                     judul: "Kisah Nabi Muhammad SAW Kecil yang Jujur (Al-Amin)",
                     hari: "Hari 4 - Selasa, 10 Maret 2026",
-                    tujuan: [
-                        "Mengetahui bahwa Nabi Muhammad SAW sejak kecil memiliki sifat jujur",
-                        "Memahami arti dan makna gelar Al-Amin",
-                        "Termotivasi menjadi anak yang jujur dalam kehidupan sehari-hari"
-                    ],
-                    dalil: {
-                        arab: "عَلَيْكُمْ بِالصِّدْقِ فَإِنَّ الصِّدْقَ يَهْدِي إِلَى الْبِرِّ، وَإِنَّ الْبِرَّ يَهْدِي إِلَى الْجَنَّةِ",
-                        arti: "Hendaklah kalian selalu berlaku jujur, karena kejujuran membawa kepada kebaikan, dan kebaikan membawa ke surga. (HR. Bukhari dan Muslim)"
-                    },
-                    isi: [
-                        "Nabi Muhammad SAW lahir di Makkah pada Tahun Gajah",
-                        "Beliau tumbuh sebagai anak yatim piatu yang sangat baik dan jujur",
-                        "Al-Amin artinya: Orang yang sangat jujur dan dapat dipercaya",
-                        "Kisah kejujuran saat berdagang dan peletakan Hajar Aswad"
-                    ],
-                    aktivitas: [
-                        "Drama Mini: Memerankan situasi 'Menemukan Dompet di Jalan'",
-                        "Tantangan Al-Amin: Tidak berbohong selama satu hari penuh",
-                        "Karya Kreatif: Membuat mahkota 'Al-Amin Cilik'"
-                    ],
-                    pesan: "Anak jujur adalah calon pemimpin hebat di masa depan.",
-                    doa: "Ya Allah, jadikanlah aku anak yang jujur. Jadikanlah aku anak yang dapat dipercaya, seperti Nabi Muhammad Al-Amin. Amin."
+                    tujuan: ["Mengetahui sifat jujur Nabi sejak kecil", "Memahami gelar Al-Amin", "Termotivasi menjadi jujur"],
+                    dalil: { arab: "عَلَيْكُمْ بِالصِّدْقِ فَإِنَّ الصِّدْقَ يَهْدِي إِلَى الْبِرِّ", arti: "Jujurlah, karena kejujuran membawa ke surga. (HR. Bukhari-Muslim)" },
+                    isi: ["Nabi lahir di Makkah, yatim piatu tapi sangat jujur", "Al-Amin: orang yang sangat dipercaya", "Kisah berdagang dan Hajar Aswad"],
+                    aktivitas: ["Drama: Menemukan dompet", "Tantangan Al-Amin: Sehari tanpa bohong"],
+                    pesan: "Anak jujur adalah calon pemimpin hebat.",
+                    doa: "Ya Allah, jadikanlah aku anak yang jujur seperti Nabi Al-Amin. Amin."
                 },
                 quran: {
                     judul: "Mengenal Huruf Hijaiyah & Surah Al-Ikhlas",
                     hari: "Hari 5 - Rabu, 11 Maret 2026",
-                    tujuan: [
-                        "Mengenal dan menyebutkan huruf hijaiyah dengan benar",
-                        "Membaca Surah Al-Ikhlas dengan tartil sederhana",
-                        "Memahami makna dasar Surah Al-Ikhlas"
-                    ],
-                    dalil: {
-                        arab: "شَهْرُ رَمَضَانَ الَّذِيْٓ اُنْزِلَ فِيْهِ الْقُرْاٰنُ",
-                        arti: "Bulan Ramadhan adalah (bulan) yang di dalamnya diturunkan Al-Qur'an. (QS. Al-Baqarah: 185)"
-                    },
-                    dalil2: {
-                        arab: "قُلْ هُوَ اللهُ اَحَدٌ ۚ اللهُ الصَّمَدُ ۚ لَمْ يَلِدْ وَلَمْ يُوْلَدْ ۙ وَلَمْ يَكُنْ لَّهٗ كُفُوًا اَحَدٌ",
-                        arti: "Katakanlah: Allah itu Esa. Allah tempat meminta. Tidak beranak dan tidak diperanakkan. Tidak ada yang setara dengan-Nya. (QS. Al-Ikhlas)"
-                    },
-                    isi: [
-                        "Huruf hijaiyah adalah kunci untuk bisa membaca Al-Qur'an (29 huruf)",
-                        "Ramadhan adalah bulan diturunkannya Al-Qur'an",
-                        "Surah Al-Ikhlas = sepertiga Al-Qur'an",
-                        "Makna: Allah itu satu, tidak ada yang sama dengan Allah"
-                    ],
-                    aktivitas: [
-                        "Mewarnai Hijaiyah: Mewarnai huruf-huruf dengan kreasi warna",
-                        "Hafalan Ceria: Menyetor hafalan Surah Al-Ikhlas",
-                        "Game Susun Ayat: Menyusun potongan ayat menjadi urutan benar"
-                    ],
-                    pesan: "Anak yang cinta Al-Qur'an, hatinya akan selalu tenang.",
-                    doa: "Ya Allah, jadikanlah kami anak yang cinta Al-Qur'an. Mudahkanlah kami membaca dan menghafalnya. Berikanlah cahaya Al-Qur'an dalam hati kami. Amin."
+                    tujuan: ["Mengenal huruf hijaiyah", "Membaca Surah Al-Ikhlas", "Memahami makna dasar"],
+                    dalil: { arab: "قُلْ هُوَ اللهُ اَحَدٌ", arti: "Katakanlah: Allah itu Esa. (QS. Al-Ikhlas: 1)" },
+                    isi: ["29 huruf hijaiyah", "Al-Ikhlas = 1/3 Al-Qur'an", "Allah itu Satu, tidak ada yang setara"],
+                    aktivitas: ["Mewarnai Hijaiyah", "Hafalan Al-Ikhlas", "Game Susun Ayat"],
+                    pesan: "Anak yang cinta Al-Qur'an hatinya tenang.",
+                    doa: "Ya Allah, mudahkanlah kami membaca Al-Qur'an. Amin."
                 },
                 hadits: {
                     judul: "Senyum Itu Sedekah",
                     hari: "Hari 6 - Kamis, 12 Maret 2026",
-                    tujuan: [
-                        "Menghafal hadits tentang senyum",
-                        "Memahami bahwa senyum adalah bentuk sedekah",
-                        "Membiasakan tersenyum kepada orang tua, guru, dan teman"
-                    ],
-                    dalil: {
-                        arab: "تَبَسُّمُكَ فِي وَجْهِ أَخِيكَ لَكَ صَدَقَةٌ",
-                        arti: "Senyummu kepada saudaramu adalah sedekah. (HR. Tirmidzi)"
-                    },
-                    isi: [
-                        "Sedekah bukan hanya uang, tapi setiap kebaikan",
-                        "Senyum membuat orang lain bahagia dan menghilangkan marah",
-                        "Senyum di bulan Ramadhan pahalanya berlipat ganda",
-                        "Senyum harus tulus dari hati, bukan mengejek"
-                    ],
-                    aktivitas: [
-                        "Latihan Senyum: Saling memberi salam dengan senyum",
-                        "Tantangan: Tersenyum kepada 5 orang hari ini",
-                        "Buat Poster: 'Tersenyum Itu Sedekah'"
-                    ],
-                    pesan: "Senyum itu mudah, berpahala, dan membuat hati bahagia.",
-                    doa: "Ya Allah, jadikan aku anak yang ramah dan murah senyum. Jadikan senyumku sebagai sedekah yang Engkau ridhai. Amin."
+                    tujuan: ["Menghafal hadits senyum", "Memahami senyum adalah sedekah", "Membiasakan tersenyum"],
+                    dalil: { arab: "تَبَسُّمُكَ فِي وَجْهِ أَخِيكَ لَكَ صَدَقَةٌ", arti: "Senyummu kepada saudaramu adalah sedekah. (HR. Tirmidzi)" },
+                    isi: ["Sedekah bukan hanya uang", "Senyum di Ramadhan pahalanya berlipat", "Senyum tulus, bukan mengejek"],
+                    aktivitas: ["Latihan Senyum", "Tantangan: senyum ke 5 orang", "Buat poster"],
+                    pesan: "Senyum itu mudah, berpahala, dan membahagiakan.",
+                    doa: "Ya Allah, jadikan senyumku sebagai sedekah. Amin."
                 },
                 fanniyah: {
-                    judul: "Kaligrafi Ar-Rahman & Ar-Rahim + Yel-Yel Penutupan",
+                    judul: "Kaligrafi Ar-Rahman & Ar-Rahim + Penutupan",
                     hari: "Hari 7 - Jumat, 13 Maret 2026",
-                    tujuan: [
-                        "Menyebutkan arti nama Allah Ar-Rahman dan Ar-Rahim",
-                        "Memahami bahwa Allah sangat sayang kepada hamba-Nya",
-                        "Membuat karya kaligrafi sederhana nama Allah"
-                    ],
-                    isi: [
-                        "Ar-Rahman: Allah Maha Pengasih kepada semua makhluk",
-                        "Ar-Rahim: Allah Maha Penyayang kepada orang yang beriman",
-                        "Ramadhan adalah bukti kasih sayang Allah",
-                        "Meniru sifat kasih sayang dengan sayang kepada teman"
-                    ],
-                    aktivitas: [
-                        "Menebalkan (Trace): Menebalkan pola huruf Arab",
-                        "Mewarnai: Gunakan warna-warna cerah",
-                        "Menghias: Tambahkan gambar hati, bulan, bintang",
-                        "Yel-Yel Penutupan: 'Kalau kau cinta Allah, shalatlah... (Allahu Akbar!)'"
-                    ],
-                    pesan: "Allah sangat sayang kepada kita semua.",
-                    doa: "Ya Allah, Ar-Rahman, Ar-Rahim. Terima kasih atas segala kasih sayang-Mu yang tiada putus. Jadikanlah kami anak yang penyayang, lembut hati, dan selalu taat kepada-Mu. Amin."
+                    tujuan: ["Menyebutkan arti Ar-Rahman & Ar-Rahim", "Membuat kaligrafi sederhana"],
+                    isi: ["Ar-Rahman: Pengasih semua makhluk", "Ar-Rahim: Penyayang orang beriman", "Meniru sifat kasih sayang"],
+                    aktivitas: ["Menebalkan & mewarnai kaligrafi", "Yel-yel penutupan"],
+                    pesan: "Allah sangat sayang kepada kita.",
+                    doa: "Ya Allah, jadikanlah kami anak yang penyayang. Amin."
                 }
             }
         },
         B: {
             nama: "Fase B (Kelas 3-4)",
-            tujuan: "Memperdalam pemahaman ibadah dengan penalaran sederhana dan cerita sejarah yang inspiratif.",
+            tujuan: "Memperdalam pemahaman ibadah dengan penalaran sederhana dan cerita sejarah inspiratif.",
             materi: {
-                akidah: {
-                    judul: "Iman kepada Allah: Al-Malik dan Al-Quddus",
-                    hari: "Hari 1 - Kamis, 5 Maret 2026",
-                    tujuan: [
-                        "Menyebutkan arti Asmaul Husna Al-Malik dan Al-Quddus",
-                        "Memahami makna keduanya dalam kehidupan sehari-hari",
-                        "Menunjukkan sikap yang sesuai dengan keimanan kepada Allah"
-                    ],
-                    dalil: {
-                        arab: "هُوَ اللهُ الَّذِيْ لَآ اِلٰهَ اِلَّا هُوَ اَلْمَلِكُ الْقُدُّوْسُ السَّلٰمُ الْمُؤْمِنُ الْمُهَيْمِنُ الْعَزِيْزُ الْجَبَّارُ الْمُتَكَبِّرُ",
-                        arti: "Dialah Allah Yang tidak ada tuhan selain Dia. Dia (adalah) Maha Raja, Yang Maha Suci... (QS. Al-Hasyr: 23)"
-                    },
-                    isi: [
-                        "Al-Malik: Allah Maha Raja, penguasa seluruh alam semesta",
-                        "Segala yang kita miliki hanyalah titipan (amanah) dari Allah",
-                        "Al-Quddus: Allah Maha Suci dari segala kekurangan",
-                        "Sikap beriman: taat aturan, tidak sombong, menjaga kebersihan"
-                    ],
-                    aktivitas: [
-                        "Diskusi: Sebutkan 5 hal yang membuktikan Allah adalah Al-Malik",
-                        "Tantangan: Menjaga kebersihan laci dan berkata jujur",
-                        "Hafalan: Melafalkan Al-Malik dan Al-Quddus beserta artinya"
-                    ],
-                    pesan: "Allah adalah Penguasa mutlak dan Maha Suci, anak beriman harus rendah hati dan bersih hati.",
-                    doa: "Ya Allah Al-Malik, jadikanlah kami hamba-Mu yang taat. Ya Allah Al-Quddus, bersihkanlah hati kami dari noda dosa. Kuatkanlah iman kami di bulan Ramadhan yang mulia ini. Amin."
-                },
-                akhlak: {
-                    judul: "Jujur dan Amanah dalam Kehidupan Sehari-hari",
-                    hari: "Hari 2 - Jumat, 6 Maret 2026",
-                    tujuan: [
-                        "Menjelaskan arti jujur dan amanah dengan bahasa yang baik",
-                        "Menyebutkan contoh perilaku jujur dan amanah",
-                        "Membiasakan sikap jujur dan bertanggung jawab"
-                    ],
-                    dalil: {
-                        arab: "عَلَيْكُمْ بِالصِّدْقِ فَإِنَّ الصِّدْقَ يَهْدِي إِلَى الْبِرِّ، وَإِنَّ الْبِرَّ يَهْدِي إِلَى الْجَنَّةِ",
-                        arti: "Hendaklah kalian selalu berlaku jujur, karena kejujuran membawa kepada kebaikan, dan kebaikan membawa ke surga. (HR. Bukhari & Muslim)"
-                    },
-                    isi: [
-                        "Jujur: kesesuaian antara perkataan dan perbuatan dengan kenyataan",
-                        "Amanah: dapat dipercaya dan bertanggung jawab atas tugas",
-                        "Puasa adalah latihan kejujuran antara kita dengan Allah",
-                        "Manfaat: kepercayaan, ketenangan hati, pahala, keberkahan"
-                    ],
-                    aktivitas: [
-                        "Role Play: Adegan lupa mengerjakan PR - berbohong atau jujur?",
-                        "Tantangan: 'Sehari Tanpa Bohong'",
-                        "Papan Amanah: Checklist tugas-tugas kecil di kelas"
-                    ],
-                    pesan: "Jujur membuat hati tenang, bohong membuat hati gelisah.",
-                    doa: "Ya Allah, jadikanlah aku anak yang jujur dalam ucapan dan perbuatan. Jadikanlah aku anak yang amanah dan bertanggung jawab. Berkahilah hidupku dengan kejujuran. Amin."
-                },
-                fiqih: {
-                    judul: "Syarat, Rukun, dan Hal yang Membatalkan Puasa",
-                    hari: "Hari 3 - Senin, 9 Maret 2026",
-                    tujuan: [
-                        "Menjelaskan pengertian puasa Ramadhan dengan benar",
-                        "Menyebutkan syarat wajib dan rukun puasa",
-                        "Mengidentifikasi hal-hal yang membatalkan puasa"
-                    ],
-                    dalil: {
-                        arab: "مَنْ نَسِيَ وَهُوَ صَائِمٌ فَأَكَلَ أَوْ شَرِبَ فَلْيُتِمَّ صَوْمَهُ فَإِنَّمَا أَطْعَمَهُ اللهُ وَسَقَاهُ",
-                        arti: "Barang siapa yang lupa padahal ia sedang berpuasa, lalu ia makan atau minum, maka hendaklah ia menyempurnakan puasanya. (HR. Bukhari & Muslim)"
-                    },
-                    isi: [
-                        "Syarat Wajib: Islam, Baligh, Berakal, Mampu (sehat)",
-                        "Rukun Puasa: Niat (di malam hari), Imsak (menahan diri)",
-                        "Membatalkan: Makan/minum sengaja, muntah sengaja, haid/nifas",
-                        "Tidak Membatalkan: Lupa makan, berkumur (tidak ditelan), debu masuk"
-                    ],
-                    aktivitas: [
-                        "Kuis Cepat: 'Batal atau Tidak?' dengan kartu hijau/merah",
-                        "Simulasi: Praktik melafalkan niat puasa",
-                        "Poster Mini: Tabel syarat dan rukun puasa"
-                    ],
-                    pesan: "Syarat dan rukun adalah pagar agar puasa kita terjaga dan diterima Allah.",
-                    doa: "Ya Allah, ajari kami menjalankan ibadah puasa dengan benar sesuai tuntunan-Mu. Terimalah puasa kami dan jadikanlah kami hamba-Mu yang bertakwa. Amin."
-                },
-                spi: {
-                    judul: "Perjuangan Nabi di Bulan Ramadhan: Kisah Perang Badar",
-                    hari: "Hari 4 - Selasa, 10 Maret 2026",
-                    tujuan: [
-                        "Mengetahui sejarah peristiwa Perang Badar",
-                        "Memahami nilai keberanian, kekuatan doa, dan tawakal",
-                        "Meneladani semangat pantang menyerah"
-                    ],
-                    dalil: {
-                        arab: "وَلَقَدْ نَصَرَكُمُ اللهُ بِبَدْرٍ وَّاَنْتُمْ اَذِلَّةٌ فَاتَّقُوا اللهَ لَعَلَّكُمْ تَشْكُرُوْنَ",
-                        arti: "Sungguh, Allah benar-benar telah menolong kamu dalam Perang Badar, padahal kamu adalah orang-orang lemah. Bertakwalah kepada Allah agar kamu bersyukur. (QS. Ali Imran: 123)"
-                    },
-                    isi: [
-                        "Perang Badar: 17 Ramadhan, tahun ke-2 Hijriyah",
-                        "Pasukan Islam ± 313 vs Quraisy ± 1.000 orang",
-                        "Rahasia kemenangan: Persatuan, Doa, Tawakal",
-                        "Hubungan dengan kita: berjihad melawan rasa malas, marah, dan godaan"
-                    ],
-                    aktivitas: [
-                        "Diskusi: Mengapa yang sedikit bisa menang?",
-                        "Drama Mini: Adegan musyawarah dan doa Nabi",
-                        "Tantangan Pejuang: 'Menang Melawan Malas'"
-                    ],
-                    pesan: "Ramadhan adalah bulan perjuangan dan kemenangan, bukan kemalasan.",
-                    doa: "Ya Allah, kuatkanlah iman dan fisik kami untuk beribadah di bulan Ramadhan. Jadikanlah kami anak yang berani, sabar, dan pantang menyerah. Amin."
-                },
-                quran: {
-                    judul: "Tadabur QS. Al-Ashr: Pentingnya Waktu",
-                    hari: "Hari 5 - Rabu, 11 Maret 2026",
-                    tujuan: [
-                        "Membaca dan menghafal QS. Al-Ashr dengan tajwid benar",
-                        "Menjelaskan arti penting waktu sebagai amanah",
-                        "Mempraktikkan manajemen waktu yang bermanfaat"
-                    ],
-                    dalil: {
-                        arab: "وَالْعَصْرِ ۙ إِنَّ الْإِنْسَانَ لَفِي خُسْرٍ ۙ إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ وَتَوَاصَوْا بِالْحَقِّ وَتَوَاصَوْا بِالصَّبْرِ",
-                        arti: "Demi masa. Sungguh, manusia berada dalam kerugian, kecuali orang-orang yang beriman, beramal saleh, saling menasihati dalam kebenaran, dan saling menasihati dalam kesabaran. (QS. Al-Ashr)"
-                    },
-                    isi: [
-                        "Allah bersumpah dengan waktu karena sangat penting",
-                        "Waktu tidak bisa diulang dan tidak bisa dibeli",
-                        "Rugi jika: bermain game lupa shalat, puasa hanya tidur",
-                        "Resep sukses: Beriman, Beramal Saleh, Saling Nasihati"
-                    ],
-                    aktivitas: [
-                        "Tantangan Jadwal Anak Hebat: Membuat jadwal harian Ramadhan",
-                        "Diskusi: 3 kegiatan 'pencuri waktu' di Ramadhan",
-                        "Hafalan Estafet: Membaca Al-Ashr bergantian"
-                    ],
-                    pesan: "Jadilah anak yang 'untung', bukan anak yang 'rugi' di bulan penuh berkah ini.",
-                    doa: "Ya Allah, berkahilah setiap detik waktu yang Engkau berikan kepada kami. Jadikanlah kami anak yang pandai menggunakan waktu untuk beribadah dan belajar. Amin."
-                },
-                hadits: {
-                    judul: "Keutamaan Puasa Ramadhan",
-                    hari: "Hari 6 - Kamis, 12 Maret 2026",
-                    tujuan: [
-                        "Menyebutkan hadits-hadits utama tentang keutamaan puasa",
-                        "Menjelaskan manfaat dan pahala puasa Ramadhan",
-                        "Menjalankan puasa dengan semangat dan ikhlas"
-                    ],
-                    dalil: {
-                        arab: "كُلُّ عَمَلِ ابْنِ آدَمَ لَهُ، إِلَّا الصَّوْمَ، فَإِنَّهُ لِي وَأَنَا أَجْزِي بِهِ",
-                        arti: "Setiap amal anak Adam adalah untuknya, kecuali puasa. Sesungguhnya puasa itu untuk-Ku dan Aku sendiri yang akan membalasnya. (HR. Bukhari & Muslim)"
-                    },
-                    dalil2: {
-                        arab: "إِنَّ فِى الْجَنَّةِ بَابًا يُقَالُ لَهُ الرَّيَّانُ، يَدْخُلُ مِنْهُ الصَّائِمُونَ يَوْمَ الْقِيَامَةِ",
-                        arti: "Sesungguhnya di surga ada pintu yang disebut Ar-Rayyan. Orang-orang yang berpuasa akan masuk melalui pintu tersebut. (HR. Bukhari)"
-                    },
-                    isi: [
-                        "Puasa adalah ibadah spesial dengan pahala kejutan dari Allah",
-                        "Puasa menghapus dosa-dosa yang telah lalu",
-                        "Pintu Ar-Rayyan: pintu surga khusus orang yang rajin puasa",
-                        "Puasa melatih: sabar, disiplin, pengendalian diri, empati"
-                    ],
-                    aktivitas: [
-                        "Diskusi: Mengapa Allah sangat mencintai orang berpuasa?",
-                        "Karya Kreatif: Menggambar imajinasi 'Pintu Ar-Rayyan'",
-                        "Hafalan Ringkas: 'Man Shoma Romadhona...'"
-                    ],
-                    pesan: "Puasa adalah penghapus dosa dan kunci masuk surga melalui pintu Ar-Rayyan.",
-                    doa: "Ya Allah, jadikanlah puasa kami sebagai ibadah yang Engkau cintai dan terima. Ampunilah dosa-dosa kami yang telah lalu, dan kumpulkanlah kami kelak di surga-Mu melalui pintu Ar-Rayyan. Amin."
-                },
-                fanniyah: {
-                    judul: "Drama Mini 'Anak Jujur di Sekolah' + Penutupan",
-                    hari: "Hari 7 - Jumat, 13 Maret 2026",
-                    tujuan: [
-                        "Memahami pentingnya sikap jujur dalam segala situasi",
-                        "Meneladani akhlak Rasulullah yang bergelar Al-Amin",
-                        "Memiliki keberanian untuk berkata benar"
-                    ],
-                    isi: [
-                        "Judul Drama: 'Dompet yang Terjatuh'",
-                        "Tokoh: Aisyah (anak jujur), Rina (teman yang membujuk), Ibu Guru",
-                        "Alur: Menemukan dompet → Godaan mengambil → Memilih jujur → Mengembalikan",
-                        "Pesan Moral: Allah Maha Melihat, kejujuran membawa kedamaian"
-                    ],
-                    aktivitas: [
-                        "Memerankan drama dengan pembagian peran",
-                        "Tanya Jawab: Mengapa Aisyah memilih jujur?",
-                        "Tulis Pengalaman: Satu pengalamanmu saat berani berkata jujur"
-                    ],
-                    pesan: "Anak hebat bukan yang nilainya tinggi, tetapi yang berani berkata jujur kapan saja.",
-                    doa: "Ya Allah, hiasilah lisan kami dengan kejujuran. Jadikanlah kami anak-anak yang amanah dan dapat dipercaya seperti Baginda Nabi Muhammad SAW. Amin."
-                }
+                akidah: { judul: "Iman kepada Allah: Al-Malik dan Al-Quddus", hari: "Hari 1 - Kamis, 5 Maret 2026", tujuan: ["Menyebutkan arti Al-Malik dan Al-Quddus", "Memahami makna dalam kehidupan"], dalil: { arab: "هُوَ اللهُ الَّذِيْ لَآ اِلٰهَ اِلَّا هُوَ اَلْمَلِكُ الْقُدُّوْسُ", arti: "Dialah Allah, Maha Raja, Maha Suci. (QS. Al-Hasyr: 23)" }, isi: ["Al-Malik: Maha Raja alam semesta", "Al-Quddus: Maha Suci dari kekurangan"], aktivitas: ["Diskusi: 5 bukti Allah Al-Malik", "Hafalan bersama"], pesan: "Allah Penguasa mutlak dan Maha Suci.", doa: "Ya Allah Al-Malik, Al-Quddus, bersihkan hati kami. Amin." },
+                akhlak: { judul: "Jujur dan Amanah", hari: "Hari 2 - Jumat, 6 Maret 2026", tujuan: ["Menjelaskan arti jujur dan amanah", "Menyebutkan contoh perilaku"], dalil: { arab: "عَلَيْكُمْ بِالصِّدْقِ", arti: "Jujurlah, kejujuran membawa ke surga. (HR. Bukhari-Muslim)" }, isi: ["Jujur: perkataan sesuai kenyataan", "Amanah: dapat dipercaya", "Puasa adalah latihan kejujuran"], aktivitas: ["Role Play: lupa PR", "Tantangan Sehari Tanpa Bohong"], pesan: "Jujur membuat hati tenang.", doa: "Ya Allah, jadikanlah aku jujur dan amanah. Amin." },
+                fiqih: { judul: "Syarat, Rukun, dan Pembatal Puasa", hari: "Hari 3 - Senin, 9 Maret 2026", tujuan: ["Menjelaskan syarat wajib puasa", "Menyebutkan rukun puasa", "Mengetahui pembatal puasa"], dalil: { arab: "مَنْ نَسِيَ وَهُوَ صَائِمٌ فَأَكَلَ أَوْ شَرِبَ فَلْيُتِمَّ صَوْمَهُ", arti: "Yang lupa makan/minum, lanjutkan puasanya. (HR. Bukhari)" }, isi: ["Syarat: Islam, Baligh, Berakal, Mampu", "Rukun: Niat, Imsak", "Pembatal: makan/minum sengaja"], aktivitas: ["Kuis Batal atau Tidak", "Praktik niat puasa"], pesan: "Syarat dan rukun menjaga puasa kita.", doa: "Ya Allah, ajari kami puasa yang benar. Amin." },
+                spi: { judul: "Kisah Perang Badar", hari: "Hari 4 - Selasa, 10 Maret 2026", tujuan: ["Mengetahui sejarah Perang Badar", "Memahami nilai keberanian dan tawakal"], dalil: { arab: "وَلَقَدْ نَصَرَكُمُ اللهُ بِبَدْرٍ وَّاَنْتُمْ اَذِلَّةٌ", arti: "Allah menolong kamu di Badar saat lemah. (QS. Ali Imran: 123)" }, isi: ["17 Ramadhan tahun 2 H", "313 vs 1000 orang", "Rahasia: Persatuan, Doa, Tawakal"], aktivitas: ["Diskusi: mengapa sedikit bisa menang", "Tantangan Pejuang"], pesan: "Ramadhan bulan perjuangan, bukan kemalasan.", doa: "Ya Allah, kuatkan kami seperti pejuang Badar. Amin." },
+                quran: { judul: "Tadabur QS. Al-Ashr: Pentingnya Waktu", hari: "Hari 5 - Rabu, 11 Maret 2026", tujuan: ["Menghafal Al-Ashr dengan tajwid benar", "Menjelaskan arti penting waktu"], dalil: { arab: "وَالْعَصْرِ ۙ إِنَّ الْإِنْسَانَ لَفِي خُسْرٍ", arti: "Demi masa, manusia dalam kerugian. (QS. Al-Ashr)" }, isi: ["Allah bersumpah dengan waktu", "Rugi: bermain lupa shalat", "Selamat: beriman, beramal saleh, saling nasihati"], aktivitas: ["Buat jadwal Ramadhan", "Hafalan estafet"], pesan: "Jadilah anak yang untung, bukan rugi.", doa: "Ya Allah, berkahilah waktu kami. Amin." },
+                hadits: { judul: "Keutamaan Puasa Ramadhan", hari: "Hari 6 - Kamis, 12 Maret 2026", tujuan: ["Menyebutkan hadits keutamaan puasa", "Menjelaskan pahala puasa"], dalil: { arab: "كُلُّ عَمَلِ ابْنِ آدَمَ لَهُ، إِلَّا الصَّوْمَ، فَإِنَّهُ لِي", arti: "Semua amal untuknya, kecuali puasa untuk-Ku. (HR. Bukhari)" }, isi: ["Puasa ibadah spesial", "Pintu Ar-Rayyan di surga", "Puasa menghapus dosa"], aktivitas: ["Gambar Pintu Ar-Rayyan", "Hafalan hadits"], pesan: "Puasa kunci masuk surga.", doa: "Ya Allah, kumpulkan kami di pintu Ar-Rayyan. Amin." },
+                fanniyah: { judul: "Drama Mini 'Anak Jujur' + Penutupan", hari: "Hari 7 - Jumat, 13 Maret 2026", tujuan: ["Memahami pentingnya jujur", "Meneladani Al-Amin"], isi: ["Drama: Dompet yang Terjatuh", "Tokoh: Aisyah, Rina, Ibu Guru", "Pesan: Allah Maha Melihat"], aktivitas: ["Memerankan drama", "Tulis pengalaman jujur"], pesan: "Anak hebat adalah yang berani jujur.", doa: "Ya Allah, jadikan kami seperti Nabi Al-Amin. Amin." }
             }
         },
         C: {
             nama: "Fase C (Kelas 5-6)",
-            tujuan: "Mengembangkan kemampuan analisis, strategi, manajemen diri, dan pendalaman makna untuk mempersiapkan generasi pemimpin.",
+            tujuan: "Mengembangkan kemampuan analisis dan manajemen diri untuk mempersiapkan generasi pemimpin.",
             materi: {
-                akidah: {
-                    judul: "Iman kepada Hari Akhir dan Tanggung Jawab Amal",
-                    hari: "Hari 1 - Kamis, 5 Maret 2026",
-                    tujuan: [
-                        "Menjelaskan makna iman kepada Hari Akhir secara mendalam",
-                        "Menyebutkan tahapan kehidupan manusia setelah kematian",
-                        "Memahami bahwa setiap amal akan dipertanggungjawabkan"
-                    ],
-                    dalil: {
-                        arab: "فَمَنْ يَّعْمَلْ مِثْقَالَ ذَرَّةٍ خَيْرًا يَّرَهٗ ۚ وَمَنْ يَّعْمَلْ مِثْقَالَ ذَرَّةٍ شَرًّا يَّرَهٗ",
-                        arti: "Maka barangsiapa mengerjakan kebaikan sebesar zarrah, niscaya dia akan melihat (balasan)nya. Dan barangsiapa mengerjakan kejahatan sebesar zarrah, niscaya dia akan melihat (balasan)nya. (QS. Az-Zalzalah: 7-8)"
-                    },
-                    isi: [
-                        "Iman kepada Hari Akhir adalah rukun iman ke-5",
-                        "Nama-nama: Yaumul Qiyamah, Yaumul Ba'ats, Yaumul Hisab, Yaumul Jaza'",
-                        "Tahapan: Barzakh → Mahsyar → Hisab & Mizan → Shirath → Surga/Neraka",
-                        "Ramadhan adalah 'Musim Menanam' untuk memberatkan timbangan kebaikan"
-                    ],
-                    aktivitas: [
-                        "Jurnal Amal 7 Hari: Checklist shalat, tadarus, sedekah, membantu ortu",
-                        "Diskusi Kritis: Mengapa orang beriman harus paling jujur?",
-                        "Refleksi: Jika ini Ramadhan terakhirku, amal apa yang ingin kubanggakan?"
-                    ],
-                    pesan: "Dunia adalah tempat menanam, Akhirat adalah tempat memanen.",
-                    doa: "Ya Allah Al-Malik, jadikanlah kami hamba-Mu yang selalu ingat akan hari pertemuan dengan-Mu. Ampunilah segala dosa dan kelalaian kami. Beratkanlah timbangan kebaikan kami. Amin."
-                },
-                akhlak: {
-                    judul: "Menjadi Teladan dalam Kebaikan",
-                    hari: "Hari 2 - Jumat, 6 Maret 2026",
-                    tujuan: [
-                        "Memahami konsep Uswatun Hasanah (teladan yang baik)",
-                        "Menyadari peran diri sebagai agent of change bagi teman sebaya",
-                        "Menunjukkan perilaku teladan secara konsisten"
-                    ],
-                    dalil: {
-                        arab: "لَقَدْ كَانَ لَكُمْ فِيْ رَسُوْلِ اللهِ اُسْوَةٌ حَسَنَةٌ لِّمَنْ كَانَ يَرْجُوا اللهَ وَالْيَوْمَ الْاٰخِرَ",
-                        arti: "Sungguh, pada (diri) Rasulullah benar-benar ada suri teladan yang baik bagimu, (yaitu) bagi orang yang mengharap (rahmat) Allah dan (kedatangan) hari Kiamat. (QS. Al-Ahzab: 21)"
-                    },
-                    dalil2: {
-                        arab: "مَنْ دَلَّ عَلَى خَيْرٍ فَلَهُ مِثْلُ أَجْرِ فَاعِلِهِ",
-                        arti: "Barang siapa yang menunjukkan kepada kebaikan, maka dia akan mendapatkan pahala seperti pahala orang yang mengerjakannya. (HR. Muslim)"
-                    },
-                    isi: [
-                        "Teladan (Uswah): kualitas perkataan dan perbuatan yang selaras",
-                        "Ciri Keteladanan Rasulullah: Shiddiq, Amanah, Tabligh, Fathanah",
-                        "Ramadhan adalah waktu terbaik untuk menempa karakter",
-                        "Dampak: Setiap kali orang meniru kebaikanmu, pahalanya mengalir"
-                    ],
-                    aktivitas: [
-                        "Target Keteladanan 7 Hari: 3 kebiasaan baru secara rahasia",
-                        "Analisis Kasus: Cara menjadi teladan tanpa terkesan menggurui",
-                        "Role Model Sharing: Sebutkan 1 orang di lingkungan yang layak diteladani"
-                    ],
-                    pesan: "Action speaks louder. Keteladanan jauh lebih kuat daripada ribuan kata nasihat.",
-                    doa: "Ya Allah, hiasilah diri kami dengan akhlak mulia sebagaimana Engkau menghiasi hamba-hamba-Mu yang shalih. Jadikanlah kami teladan dalam kebaikan. Amin."
-                },
-                fiqih: {
-                    judul: "Hikmah Puasa Ramadhan dan Zakat Fitrah",
-                    hari: "Hari 3 - Senin, 9 Maret 2026",
-                    tujuan: [
-                        "Menjelaskan hikmah mendalam dari ibadah puasa Ramadhan",
-                        "Memahami tujuan, hukum, dan manfaat zakat fitrah",
-                        "Menunjukkan sikap empati, peduli, dan tanggung jawab sosial"
-                    ],
-                    dalil: {
-                        arab: "فَرَضَ رَسُوْلُ اللهِ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ زَكَاةَ الْفِطْرِ طُهْرَةً لِلْصَائِمِ مِنَ اللَّغْوِ وَالرَّفَثِ وَطُعْمَةً لِلْمِسْكِيْنِ",
-                        arti: "Rasulullah mewajibkan zakat fitrah untuk mensucikan orang yang berpuasa dari perkataan sia-sia dan kotor, serta sebagai makanan bagi orang-orang miskin. (HR. Abu Dawud)"
-                    },
-                    isi: [
-                        "5 Hikmah Puasa: Ketakwaan, Kesabaran, Disiplin, Empati, Detoksifikasi Jiwa & Raga",
-                        "Tujuan Zakat Fitrah: Pembersih puasa, makanan bagi fakir miskin, solidaritas",
-                        "Puasa = Hablum Minallah, Zakat = Hablum Minannas",
-                        "Ibadah sempurna = seimbang antara kesalehan pribadi dan sosial"
-                    ],
-                    aktivitas: [
-                        "Diskusi Panel: Apa yang terjadi jika rajin puasa tapi pelit zakat?",
-                        "Proyek Mini: Poster 'Puasa Menumbuhkan Kepedulian, Zakat Menebar Kebahagiaan'",
-                        "Refleksi Tertulis: 3 perubahan sikap sejak awal Ramadhan"
-                    ],
-                    pesan: "Muslim yang bertakwa adalah Muslim yang tangannya selalu ringan untuk menolong.",
-                    doa: "Ya Allah, terimalah puasa kami yang penuh kekurangan ini. Sempurnakanlah ibadah kami dengan zakat fitrah yang kami tunaikan. Amin."
-                },
-                spi: {
-                    judul: "Strategi Dakwah Rasulullah SAW di Makkah dan Madinah",
-                    hari: "Hari 4 - Selasa, 10 Maret 2026",
-                    tujuan: [
-                        "Menjelaskan perbedaan strategi dakwah periode Makkah dan Madinah",
-                        "Memahami nilai kesabaran, perencanaan matang, dan pentingnya persatuan",
-                        "Meneladani prinsip dakwah yang bijak"
-                    ],
-                    dalil: {
-                        arab: "اُدْعُ اِلٰى سَبِيْلِ رَبِّكَ بِالْحِكْمَةِ وَالْمَوْعِظَةِ الْحَسَنَةِ",
-                        arti: "Serulah (manusia) ke jalan Tuhanmu dengan hikmah dan pengajaran yang baik. (QS. An-Nahl: 125)"
-                    },
-                    isi: [
-                        "Periode Makkah: Dakwah sembunyi-sembunyi, Pembinaan di Darul Arqam, Kesabaran strategis",
-                        "Periode Madinah: Pembangunan Masjid Nabawi, Ukhuwah Islamiyah, Piagam Madinah",
-                        "Implementasi: Dakwah melalui perbuatan (Lisanul Hal), menjadi magnet kebaikan",
-                        "Prinsip: Adaptasi kondisi lingkungan, Iman dulu baru sistem"
-                    ],
-                    aktivitas: [
-                        "Diskusi Kelompok: Mengapa Rasulullah utamakan masjid dan persaudaraan di Madinah?",
-                        "Mapping Timeline: Bagan perjalanan dakwah Makkah-Madinah",
-                        "Roleplay Bijak: Simulasi mengajak teman menjauhi kebiasaan buruk dengan santun"
-                    ],
-                    pesan: "Strategi dakwah tercanggih adalah menunjukkan akhlak yang mulia.",
-                    doa: "Ya Allah, jadikanlah kami generasi yang memiliki kecerdasan dalam berdakwah dan kesabaran dalam berjuang. Amin."
-                },
-                quran: {
-                    judul: "Tadabbur Surah Al-Baqarah Ayat 183: Menjadi Pribadi Muttaqin",
-                    hari: "Hari 5 - Rabu, 11 Maret 2026",
-                    tujuan: [
-                        "Membaca, menghafal, dan memahami struktur makna QS. Al-Baqarah: 183",
-                        "Menjelaskan tujuan utama puasa sebagai sarana pembentuk karakter takwa",
-                        "Menginternalisasi nilai takwa dalam perilaku nyata"
-                    ],
-                    dalil: {
-                        arab: "يٰٓاَيُّهَا الَّذِيْنَ اٰمَنُوْا كُتِبَ عَلَيْكُمُ الصِّيَامُ كَمَا كُتِبَ عَلَى الَّذِيْنَ مِنْ قَبْلِكُمْ لَعَلَّكُمْ تَتَّقُوْنَ",
-                        arti: "Wahai orang-orang yang beriman, diwajibkan atas kamu berpuasa sebagaimana diwajibkan atas orang-orang sebelum kamu agar kamu bertakwa. (QS. Al-Baqarah: 183)"
-                    },
-                    isi: [
-                        "Panggilan 'Wahai orang-orang yang beriman' = panggilan cinta dari Allah",
-                        "Puasa adalah kurikulum wajib untuk melatih mental dan disiplin",
-                        "Puasa adalah warisan para Nabi terdahulu",
-                        "Goal akhir: Menjadi Muttaqin (orang yang bertakwa/merasa selalu dalam pengawasan Allah)"
-                    ],
-                    aktivitas: [
-                        "Analisis Diskusi: Bedanya puasa karena tradisi vs puasa karena ingin bertakwa",
-                        "Jurnal Perubahan: 3 sifat buruk yang ingin 'dibuang' selama Ramadhan",
-                        "Karya Kreatif: Poster motivasi 'La'allakum tattaquun'"
-                    ],
-                    pesan: "Takwa adalah 'CCTV' di dalam hati yang membuat kita selalu berbuat baik.",
-                    doa: "Ya Allah, jadikanlah ibadah puasa kami sebagai jalan menuju takwa. Jangan biarkan puasa kami hanya menghasilkan lapar dan dahaga saja. Amin."
-                },
-                hadits: {
-                    judul: "Pemuda yang Dicintai Allah: Meraih Naungan di Hari Kiamat",
-                    hari: "Hari 6 - Kamis, 12 Maret 2026",
-                    tujuan: [
-                        "Menyebutkan dan memahami hadits tentang tujuh golongan yang mendapat naungan Allah",
-                        "Mengidentifikasi ciri-ciri pemuda yang tumbuh dalam ketaatan",
-                        "Termotivasi untuk memanfaatkan masa muda dengan aktivitas bernilai ibadah"
-                    ],
-                    dalil: {
-                        arab: "سَبْعَةٌ يُظِلُّهُمُ اللهُ فِي ظِلِّهِ، يَوْمَ لَا ظِلَّ إِلَّا ظِلُّهُ: الإِمَامُ العَادِلُ، وَشَابٌّ نَشَأَ فِي عِبَادَةِ رَبِّهِ",
-                        arti: "Tujuh golongan yang akan mendapat naungan Allah pada hari yang tidak ada naungan selain naungan-Nya... salah satunya adalah seorang pemuda yang tumbuh dalam ibadah kepada Allah. (HR. Bukhari & Muslim)"
-                    },
-                    isi: [
-                        "Masa muda istimewa: energi melimpah, masa pencarian jati diri, investasi masa depan",
-                        "Tumbuh dalam ibadah: menjadikan Allah sebagai tujuan, menjaga shalat, benteng diri",
-                        "Ramadhan = Kawah Candradimuka Pemuda Shalih",
-                        "Ciri pemuda idaman: Prinsipil, Disiplin, Lisan terjaga, Berorientasi manfaat"
-                    ],
-                    aktivitas: [
-                        "Diskusi Panel: Mengapa godaan pemuda zaman sekarang lebih sulit?",
-                        "Target Pasca-Ramadhan: 3 kebiasaan ibadah yang tetap ada setelah Ramadhan",
-                        "Role Model Sharing: Kisah pemuda Islam hebat (Mush'ab bin Umair, Muhammad Al-Fatih)"
-                    ],
-                    pesan: "Menjadi shalih di waktu muda adalah prestasi terbesar seorang hamba di mata Allah.",
-                    doa: "Ya Allah, bimbinglah kami agar menjadi pemuda-pemuda yang tumbuh dalam ketaatan kepada-Mu. Lindungilah masa muda kami dari pergaulan yang buruk. Amin."
-                },
-                fanniyah: {
-                    judul: "Public Speaking & Teknik Sukses Kultum + Penutupan",
-                    hari: "Hari 7 - Jumat, 13 Maret 2026",
-                    tujuan: [
-                        "Memahami teknik dasar komunikasi (public speaking) sesuai adab Islami",
-                        "Menyusun kerangka teks kultum yang sistematis",
-                        "Menyampaikan pesan dakwah dengan percaya diri dan santun"
-                    ],
-                    dalil: {
-                        arab: "اُدْعُ اِلٰى سَبِيْلِ رَبِّكَ بِالْحِكْمَةِ وَالْمَوْعِظَةِ الْحَسَنَةِ",
-                        arti: "Serulah (manusia) ke jalan Tuhanmu dengan hikmah dan pengajaran yang baik. (QS. An-Nahl: 125)"
-                    },
-                    isi: [
-                        "Struktur Kultum: Pembukaan → Isi Materi (Dalil) → Pesan Inti → Penutup",
-                        "Teknik Vokal: Volume pas, tempo tidak terlalu cepat, penekanan kata penting",
-                        "Kontak Mata: Edarkan pandangan ke seluruh audiens",
-                        "Kesalahan yang dihindari: Membaca teks terus, suara monoton, gerakan berlebihan/kaku"
-                    ],
-                    aktivitas: [
-                        "Menyusun Outline: Kerangka kultum 'Keutamaan Puasa bagi Pelajar'",
-                        "Praktik 2 Menit: Tampil di depan kelompok kecil",
-                        "Peer Review: 1 masukan positif dan 1 masukan perbaikan",
-                        "Acara Penutupan: Doa bersama dan pembagian sertifikat"
-                    ],
-                    pesan: "Pemuda yang berani menyampaikan kebenaran adalah calon pemimpin masa depan.",
-                    doa: "Ya Allah, lancarkanlah lisan kami dalam menyampaikan kebenaran. Berikanlah kami keberanian untuk berdakwah dan keikhlasan dalam setiap ucapan. Amin."
-                }
+                akidah: { judul: "Iman kepada Hari Akhir", hari: "Hari 1 - Kamis, 5 Maret 2026", tujuan: ["Menjelaskan makna iman kepada Hari Akhir", "Menyebutkan tahapan setelah mati"], dalil: { arab: "فَمَنْ يَّعْمَلْ مِثْقَالَ ذَرَّةٍ خَيْرًا يَّرَهٗ", arti: "Kebaikan sebesar zarrah akan terlihat. (QS. Az-Zalzalah: 7)" }, isi: ["Rukun iman ke-5", "Tahapan: Barzakh, Mahsyar, Hisab, Shirath", "Ramadhan musim menanam"], aktivitas: ["Jurnal Amal 7 Hari", "Refleksi Ramadhan terakhir"], pesan: "Dunia tempat menanam, Akhirat memanen.", doa: "Ya Allah, beratkanlah timbangan kebaikan kami. Amin." },
+                akhlak: { judul: "Menjadi Teladan dalam Kebaikan", hari: "Hari 2 - Jumat, 6 Maret 2026", tujuan: ["Memahami konsep Uswatun Hasanah", "Menyadari peran sebagai agent of change"], dalil: { arab: "لَقَدْ كَانَ لَكُمْ فِيْ رَسُوْلِ اللهِ اُسْوَةٌ حَسَنَةٌ", arti: "Pada Rasulullah ada teladan yang baik. (QS. Al-Ahzab: 21)" }, isi: ["Teladan: perkataan selaras perbuatan", "Sifat Rasul: Shiddiq, Amanah, Tabligh, Fathanah"], aktivitas: ["Target keteladanan 7 hari", "Role model sharing"], pesan: "Keteladanan lebih kuat dari ribuan nasihat.", doa: "Ya Allah, jadikan kami teladan kebaikan. Amin." },
+                fiqih: { judul: "Hikmah Puasa dan Zakat Fitrah", hari: "Hari 3 - Senin, 9 Maret 2026", tujuan: ["Menjelaskan hikmah puasa", "Memahami tujuan zakat fitrah"], dalil: { arab: "زَكَاةَ الْفِطْرِ طُهْرَةً لِلْصَائِمِ", arti: "Zakat fitrah mensucikan orang berpuasa. (HR. Abu Dawud)" }, isi: ["5 Hikmah Puasa: Takwa, Sabar, Disiplin, Empati, Detoksifikasi", "Zakat: pembersih puasa, makanan miskin"], aktivitas: ["Diskusi: puasa tanpa zakat", "Poster hikmah"], pesan: "Muslim bertakwa ringan tangan menolong.", doa: "Ya Allah, sempurnakan ibadah kami. Amin." },
+                spi: { judul: "Strategi Dakwah Rasulullah di Makkah & Madinah", hari: "Hari 4 - Selasa, 10 Maret 2026", tujuan: ["Menjelaskan perbedaan strategi dakwah", "Memahami nilai kesabaran dan persatuan"], dalil: { arab: "اُدْعُ اِلٰى سَبِيْلِ رَبِّكَ بِالْحِكْمَةِ", arti: "Serulah dengan hikmah dan pengajaran baik. (QS. An-Nahl: 125)" }, isi: ["Makkah: dakwah sembunyi, Darul Arqam, sabar", "Madinah: Masjid Nabawi, Ukhuwah, Piagam Madinah"], aktivitas: ["Timeline dakwah", "Roleplay ajak teman"], pesan: "Strategi terbaik adalah akhlak mulia.", doa: "Ya Allah, jadikan kami cerdas berdakwah. Amin." },
+                quran: { judul: "Tadabbur Al-Baqarah 183: Menjadi Muttaqin", hari: "Hari 5 - Rabu, 11 Maret 2026", tujuan: ["Memahami struktur makna ayat puasa", "Menginternalisasi nilai takwa"], dalil: { arab: "كُتِبَ عَلَيْكُمُ الصِّيَامُ... لَعَلَّكُمْ تَتَّقُوْنَ", arti: "Diwajibkan puasa agar kamu bertakwa. (QS. Al-Baqarah: 183)" }, isi: ["Panggilan 'wahai orang beriman' = panggilan cinta", "Goal: menjadi Muttaqin", "Takwa = CCTV dalam hati"], aktivitas: ["Jurnal 3 sifat buruk dibuang", "Poster La'allakum tattaquun"], pesan: "Takwa membuat kita selalu berbuat baik.", doa: "Ya Allah, jadikan puasa kami jalan menuju takwa. Amin." },
+                hadits: { judul: "Pemuda yang Dicintai Allah", hari: "Hari 6 - Kamis, 12 Maret 2026", tujuan: ["Memahami hadits 7 golongan dalam naungan Allah", "Mengidentifikasi ciri pemuda shalih"], dalil: { arab: "وَشَابٌّ نَشَأَ فِي عِبَادَةِ رَبِّهِ", arti: "Pemuda yang tumbuh dalam ibadah. (HR. Bukhari-Muslim)" }, isi: ["Masa muda: energi, jati diri, investasi", "Ciri: prinsipil, disiplin, lisan terjaga"], aktivitas: ["Diskusi godaan zaman now", "Target pasca-Ramadhan"], pesan: "Shalih di waktu muda adalah prestasi terbesar.", doa: "Ya Allah, bimbing kami tumbuh dalam ketaatan. Amin." },
+                fanniyah: { judul: "Public Speaking & Teknik Kultum + Penutupan", hari: "Hari 7 - Jumat, 13 Maret 2026", tujuan: ["Memahami teknik public speaking Islami", "Menyusun kerangka kultum"], dalil: { arab: "اُدْعُ اِلٰى سَبِيْلِ رَبِّكَ بِالْحِكْمَةِ", arti: "Serulah dengan hikmah. (QS. An-Nahl: 125)" }, isi: ["Struktur: Pembukaan, Isi+Dalil, Pesan, Penutup", "Teknik: volume, tempo, kontak mata"], aktivitas: ["Praktik kultum 2 menit", "Peer review"], pesan: "Pemuda berani menyampaikan kebenaran adalah calon pemimpin.", doa: "Ya Allah, lancarkanlah lisan kami berdakwah. Amin." }
             }
         }
     };
 
     // ==================== LOCAL STORAGE ====================
     function saveToStorage() {
-        const data = {
-            petugas: petugas,
-            lastUpdated: new Date().toISOString()
-        };
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ petugas, lastUpdated: new Date().toISOString() }));
         showSavedStatus();
     }
 
     function loadFromStorage() {
         const saved = localStorage.getItem(STORAGE_KEY);
-        if (saved) {
-            const data = JSON.parse(saved);
-            petugas = data.petugas || defaultPetugas;
-        } else {
-            petugas = JSON.parse(JSON.stringify(defaultPetugas));
-        }
+        petugas = saved ? (JSON.parse(saved).petugas || JSON.parse(JSON.stringify(defaultPetugas))) : JSON.parse(JSON.stringify(defaultPetugas));
     }
 
     function showSavedStatus() {
         const status = document.getElementById('savedStatus');
         status.style.display = 'inline-block';
-        setTimeout(() => { status.style.display = 'none'; }, 2000);
+        setTimeout(() => status.style.display = 'none', 2000);
     }
 
     function resetData() {
-        if (confirm('Apakah Anda yakin ingin mengembalikan data ke pengaturan awal?')) {
+        if (confirm('Reset ke pengaturan awal? Semua perubahan akan hilang!')) {
             petugas = JSON.parse(JSON.stringify(defaultPetugas));
             saveToStorage();
             renderPetugas();
+            alert('✓ Data berhasil direset!');
         }
     }
 
-    // ==================== ADMIN AUTHENTICATION ====================
-    function showLogin() {
-        document.getElementById('loginModal').style.display = 'flex';
-    }
-
-    function closeLogin() {
-        document.getElementById('loginModal').style.display = 'none';
-        updateAdminUI();
-    }
-
+    // ==================== ADMIN ====================
+    function showLogin() { document.getElementById('loginModal').style.display = 'flex'; }
+    function closeLogin() { document.getElementById('loginModal').style.display = 'none'; updateAdminUI(); }
+    
     function doLogin() {
-        const password = document.getElementById('adminPassword').value;
-        if (password === ADMIN_PASSWORD) {
+        if (document.getElementById('adminPassword').value === ADMIN_PASSWORD) {
             isAdmin = true;
             document.getElementById('loginModal').style.display = 'none';
             document.getElementById('adminPassword').value = '';
@@ -1163,19 +773,9 @@
         }
     }
 
-    function doLogout() {
-        isAdmin = false;
-        updateAdminUI();
-    }
-
     function toggleAdminModal() {
-        if (isAdmin) {
-            if (confirm('Logout dari mode Admin?')) {
-                doLogout();
-            }
-        } else {
-            showLogin();
-        }
+        if (isAdmin) { if (confirm('Logout?')) { isAdmin = false; updateAdminUI(); } }
+        else showLogin();
     }
 
     function updateAdminUI() {
@@ -1184,19 +784,16 @@
         const readonlyNotice = document.getElementById('readonlyNotice');
         
         if (isAdmin) {
-            adminStatus.innerHTML = '🔓 Mode: Admin <small>(klik untuk logout)</small>';
+            adminStatus.innerHTML = '🔓 Admin <small>(logout)</small>';
             adminButtons.style.display = 'block';
             readonlyNotice.style.display = 'none';
             document.querySelectorAll('.admin-only').forEach(el => el.style.display = '');
-            document.querySelectorAll('input, select').forEach(el => el.disabled = false);
         } else {
-            adminStatus.innerHTML = '👤 Mode: Pengunjung <small>(klik untuk login)</small>';
+            adminStatus.innerHTML = '👤 Pengunjung <small>(login)</small>';
             adminButtons.style.display = 'none';
             readonlyNotice.style.display = 'block';
             document.querySelectorAll('.admin-only').forEach(el => el.style.display = 'none');
-            document.querySelectorAll('#tbodyPetugas input, #tbodyPetugas select').forEach(el => el.disabled = true);
         }
-        
         renderPetugas();
     }
 
@@ -1204,32 +801,26 @@
     function checkConflicts() {
         const conflicts = [];
         
-        // Check for same person assigned to multiple different fases on same day
         jadwalHarian.forEach(j => {
-            const dayAssignments = {};
+            const guruAtDay = {};
             
-            petugas.forEach((p, idx) => {
+            petugas.forEach(p => {
                 if (p.hari && p.hari.includes(j.no)) {
-                    if (!dayAssignments[p.nama]) {
-                        dayAssignments[p.nama] = [];
-                    }
-                    dayAssignments[p.nama].push({ fase: p.fase, tipe: p.tipe });
+                    if (!guruAtDay[p.nama]) guruAtDay[p.nama] = [];
+                    guruAtDay[p.nama].push(p.fase);
                 }
             });
             
-            Object.keys(dayAssignments).forEach(nama => {
-                const assignments = dayAssignments[nama];
-                if (assignments.length > 1) {
-                    const fases = [...new Set(assignments.map(a => a.fase))];
-                    // Conflict if assigned to multiple different specific fases (not "Semua")
-                    const specificFases = fases.filter(f => f !== 'Semua');
-                    if (specificFases.length > 1) {
-                        conflicts.push({
-                            hari: j.tgl,
-                            nama: nama,
-                            message: `${nama} dijadwalkan di Fase ${specificFases.join(' dan ')} pada ${j.tgl}!`
-                        });
-                    }
+            Object.keys(guruAtDay).forEach(nama => {
+                const fases = [...new Set(guruAtDay[nama])];
+                if (fases.length > 1) {
+                    conflicts.push({
+                        hari: j.no,
+                        tgl: j.tgl,
+                        nama: nama,
+                        fases: fases,
+                        message: `⚠️ ${nama} mengajar di Fase ${fases.join(' & ')} pada Hari ${j.no} (${j.tgl})!`
+                    });
                 }
             });
         });
@@ -1237,72 +828,61 @@
         return conflicts;
     }
 
-    function renderConflictWarnings() {
-        const container = document.getElementById('conflictWarnings');
+    function renderConflictWarnings(containerId) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        
         const conflicts = checkConflicts();
         
         if (conflicts.length === 0) {
-            container.innerHTML = '';
-            return;
+            container.innerHTML = '<div class="no-conflict">✅ <strong>Tidak ada bentrok!</strong> Semua petugas hanya mengajar di 1 rombel per hari.</div>';
+        } else {
+            container.innerHTML = conflicts.map(c => `<div class="conflict-warning"><span>🚫</span><div>${c.message}</div></div>`).join('');
         }
-        
-        let html = '';
-        conflicts.forEach(c => {
-            html += `<div class="conflict-warning">
-                <span>⚠️</span>
-                <div><strong>Bentrok:</strong> ${c.message}</div>
-            </div>`;
-        });
-        
-        container.innerHTML = html;
     }
 
-    // ==================== RENDER FUNCTIONS ====================
+    // ==================== RENDER ====================
     function renderPetugas() {
         const tbody = document.getElementById('tbodyPetugas');
         tbody.innerHTML = '';
         
         petugas.forEach((p, i) => {
             const hariStr = p.hari ? p.hari.join(',') : '';
-            const faseClass = p.fase === 'A' ? 'fase-a' : p.fase === 'B' ? 'fase-b' : p.fase === 'C' ? 'fase-c' : 'fase-semua';
+            const faseClass = p.fase === 'A' ? 'fase-a' : p.fase === 'B' ? 'fase-b' : 'fase-c';
+            const tipeClass = p.tipe === 'Guru Kelas' ? 'tipe-kelas' : p.tipe === 'Guru Ngaji' ? 'tipe-ngaji' : p.tipe === 'Guru PAI' ? 'tipe-pai' : 'tipe-pjok';
             
-            // Create hari chips
             let hariChips = '';
             for (let h = 1; h <= 7; h++) {
-                const isActive = p.hari && p.hari.includes(h);
-                hariChips += `<span class="hari-chip ${isActive ? 'active' : ''}">${h}</span>`;
+                hariChips += `<span class="hari-chip ${p.hari?.includes(h) ? 'active' : ''}">${h}</span>`;
             }
             
             tbody.innerHTML += `
                 <tr>
                     <td>${i + 1}</td>
+                    <td><input value="${p.nama}" onchange="updateData(${i}, 'nama', this.value)" ${!isAdmin ? 'disabled' : ''}></td>
                     <td>
-                        <input value="${p.nama}" onchange="updateData(${i}, 'nama', this.value)" ${!isAdmin ? 'disabled' : ''}>
-                    </td>
-                    <td>
-                        <select onchange="updateData(${i}, 'tipe', this.value)" ${!isAdmin ? 'disabled' : ''}>
+                        <span class="tipe-badge ${tipeClass}">${p.tipe}</span>
+                        ${isAdmin ? `<select onchange="updateData(${i}, 'tipe', this.value)" style="margin-top:5px;font-size:0.8rem;">
                             <option ${p.tipe=='Guru Kelas'?'selected':''}>Guru Kelas</option>
                             <option ${p.tipe=='Guru Ngaji'?'selected':''}>Guru Ngaji</option>
-                            <option ${p.tipe=='Guru Mapel'?'selected':''}>Guru Mapel</option>
-                        </select>
-                    </td>
-                    <td>
-                        <span class="fase-badge ${faseClass}">${p.fase}</span>
-                        ${isAdmin ? `<select onchange="updateData(${i}, 'fase', this.value)" style="margin-top: 5px;">
-                            <option ${p.fase=='A'?'selected':''}>A</option>
-                            <option ${p.fase=='B'?'selected':''}>B</option>
-                            <option ${p.fase=='C'?'selected':''}>C</option>
-                            <option ${p.fase=='Semua'?'selected':''}>Semua</option>
+                            <option ${p.tipe=='Guru PAI'?'selected':''}>Guru PAI</option>
+                            <option ${p.tipe=='Guru PJOK'?'selected':''}>Guru PJOK</option>
                         </select>` : ''}
                     </td>
                     <td>
-                        <input type="text" value="${hariStr}" placeholder="1,2,3" 
-                            onchange="updateHari(${i}, this.value)" 
-                            style="width: 100px; margin-bottom: 5px;" ${!isAdmin ? 'disabled' : ''}>
+                        <span class="fase-badge ${faseClass}">${p.fase}</span>
+                        ${isAdmin ? `<select onchange="updateData(${i}, 'fase', this.value)" style="margin-top:5px;font-size:0.8rem;">
+                            <option ${p.fase=='A'?'selected':''}>A</option>
+                            <option ${p.fase=='B'?'selected':''}>B</option>
+                            <option ${p.fase=='C'?'selected':''}>C</option>
+                        </select>` : ''}
+                    </td>
+                    <td>
+                        <input type="text" value="${hariStr}" placeholder="1,2,3" onchange="updateHari(${i}, this.value)" style="width:80px;margin-bottom:3px;font-size:0.85rem;" ${!isAdmin ? 'disabled' : ''}>
                         <div class="hari-info">${hariChips}</div>
                     </td>
                     <td class="admin-only" ${!isAdmin ? 'style="display:none;"' : ''}>
-                        <button class="btn btn-del" onclick="removeRow(${i})">🗑️ Hapus</button>
+                        <button class="btn btn-del" onclick="removeRow(${i})">🗑️</button>
                     </td>
                 </tr>
             `;
@@ -1310,26 +890,39 @@
         
         updateDashboard();
         buildJadwal();
-        renderConflictWarnings();
+        renderConflictWarnings('conflictWarnings');
+        renderConflictWarnings('conflictWarningsJadwal');
     }
 
     function updateDashboard() {
-        document.getElementById('countFaseA').textContent = petugas.filter(p => p.fase === 'A').length;
-        document.getElementById('countFaseB').textContent = petugas.filter(p => p.fase === 'B').length;
-        document.getElementById('countFaseC').textContent = petugas.filter(p => p.fase === 'C').length;
-        document.getElementById('countTotal').textContent = petugas.length;
+        // Count unique names per fase
+        const uniqueNames = [...new Set(petugas.map(p => p.nama))];
+        const faseA = [...new Set(petugas.filter(p => p.fase === 'A').map(p => p.nama))].length;
+        const faseB = [...new Set(petugas.filter(p => p.fase === 'B').map(p => p.nama))].length;
+        const faseC = [...new Set(petugas.filter(p => p.fase === 'C').map(p => p.nama))].length;
+        
+        document.getElementById('countFaseA').textContent = faseA;
+        document.getElementById('countFaseB').textContent = faseB;
+        document.getElementById('countFaseC').textContent = faseC;
+        document.getElementById('countTotal').textContent = uniqueNames.length;
+        
+        const uniqueByType = (type) => [...new Set(petugas.filter(p => p.tipe === type).map(p => p.nama))].length;
+        document.getElementById('countGuruKelas').textContent = uniqueByType('Guru Kelas');
+        document.getElementById('countGuruNgaji').textContent = uniqueByType('Guru Ngaji');
+        document.getElementById('countGuruPAI').textContent = uniqueByType('Guru PAI');
+        document.getElementById('countGuruPJOK').textContent = uniqueByType('Guru PJOK');
     }
 
     function addRow() {
         if (!isAdmin) return;
-        petugas.push({ nama: "Petugas Baru", tipe: "Guru Kelas", fase: "A", hari: [1,2,3,4] });
+        petugas.push({ nama: "Petugas Baru", tipe: "Guru Kelas", fase: "A", hari: [1,2,3,4,5,6,7] });
         saveToStorage();
         renderPetugas();
     }
 
     function removeRow(i) {
         if (!isAdmin) return;
-        if (confirm('Hapus petugas ini?')) {
+        if (confirm('Hapus "' + petugas[i].nama + '" (Fase ' + petugas[i].fase + ')?')) {
             petugas.splice(i, 1);
             saveToStorage();
             renderPetugas();
@@ -1340,33 +933,19 @@
         if (!isAdmin) return;
         petugas[i][field] = val;
         saveToStorage();
-        buildJadwal();
-        renderConflictWarnings();
+        renderPetugas();
     }
 
     function updateHari(i, val) {
         if (!isAdmin) return;
-        // Parse input: accept formats like "1,2,3" or "1 2 3" or "1-3"
         let hari = [];
-        
-        // Check for range format (e.g., "1-4")
         if (val.includes('-')) {
-            const parts = val.split('-');
-            if (parts.length === 2) {
-                const start = parseInt(parts[0].trim());
-                const end = parseInt(parts[1].trim());
-                if (!isNaN(start) && !isNaN(end)) {
-                    for (let h = start; h <= end; h++) {
-                        if (h >= 1 && h <= 7) hari.push(h);
-                    }
-                }
-            }
+            const [start, end] = val.split('-').map(h => parseInt(h.trim()));
+            for (let h = start; h <= end && h >= 1 && h <= 7; h++) hari.push(h);
         } else {
-            // Comma or space separated
             hari = val.split(/[,\s]+/).map(h => parseInt(h.trim())).filter(h => !isNaN(h) && h >= 1 && h <= 7);
         }
-        
-        petugas[i].hari = [...new Set(hari)].sort((a,b) => a-b); // Remove duplicates and sort
+        petugas[i].hari = [...new Set(hari)].sort((a,b) => a-b);
         saveToStorage();
         renderPetugas();
     }
@@ -1375,9 +954,7 @@
         const div = document.getElementById('renderJadwal');
         let html = '';
         
-        const faseList = ['A', 'B', 'C'];
-        
-        faseList.forEach(f => {
+        ['A', 'B', 'C'].forEach(f => {
             const faseClass = f === 'A' ? 'fase-a' : f === 'B' ? 'fase-b' : 'fase-c';
             const kelasInfo = f === 'A' ? 'Kelas 1-2' : f === 'B' ? 'Kelas 3-4' : 'Kelas 5-6';
             
@@ -1387,50 +964,42 @@
                 <table>
                     <thead>
                         <tr>
-                            <th style="width: 5%;">Hari</th>
-                            <th style="width: 15%;">Tanggal</th>
-                            <th style="width: 10%;">Waktu</th>
-                            <th style="width: 20%;">Kegiatan</th>
-                            <th style="width: 25%;">Penyampai Materi</th>
-                            <th style="width: 25%;">Pembimbing Ngaji</th>
+                            <th style="width:5%;">H</th>
+                            <th style="width:13%;">Tanggal</th>
+                            <th style="width:8%;">Waktu</th>
+                            <th style="width:16%;">Kegiatan</th>
+                            <th style="width:29%;">Penyampai Materi</th>
+                            <th style="width:29%;">Pembimbing Ngaji</th>
                         </tr>
                     </thead>
                     <tbody>`;
             
-            jadwalHarian.forEach((j) => {
-                // Filter guru yang bertugas di hari ini dan fase ini
-                const listGK = petugas.filter(p => 
-                    (p.fase === f || p.fase === 'Semua') && 
-                    p.tipe === 'Guru Kelas' && 
-                    p.hari && p.hari.includes(j.no)
-                );
-                const listGN = petugas.filter(p => 
-                    (p.fase === f || p.fase === 'Semua') && 
-                    p.tipe === 'Guru Ngaji' && 
-                    p.hari && p.hari.includes(j.no)
-                );
-                const listGM = petugas.filter(p => 
-                    p.tipe === 'Guru Mapel' && 
-                    p.hari && p.hari.includes(j.no)
-                );
-
-                const gKelas = listGK.length > 0 ? listGK.map(g => g.nama).join(', ') : '<span style="color: #ef4444; font-style: italic;">Belum diatur</span>';
-                const gNgaji = listGN.length > 0 ? listGN.map(g => g.nama).join(', ') : '<span style="color: #ef4444; font-style: italic;">Belum diatur</span>';
-                const gMapel = listGM.length > 0 ? `<br><small style="color: #6b7280;">+ ${listGM.map(g => g.nama).join(', ')}</small>` : '';
+            jadwalHarian.forEach(j => {
+                const getGuru = (tipes) => petugas.filter(p => p.fase === f && tipes.includes(p.tipe) && p.hari?.includes(j.no));
+                
+                const guruKelas = getGuru(['Guru Kelas']);
+                const guruMapel = getGuru(['Guru PAI', 'Guru PJOK']);
+                const guruNgaji = getGuru(['Guru Ngaji']);
+                
+                const allMateri = [...guruKelas, ...guruMapel];
+                
+                const formatGuru = (list) => list.length > 0 
+                    ? `<div class="guru-list">${list.map(g => `<span class="guru-item">${g.nama}</span>`).join('')}</div><small style="color:#6b7280;">(${list.length} org)</small>`
+                    : '<span style="color:#ef4444;font-style:italic;">Belum diatur</span>';
 
                 html += `
                     <tr>
-                        <td rowspan="2" style="text-align: center; font-weight: bold; background: #f8fafc;">${j.no}</td>
+                        <td rowspan="2" style="text-align:center;font-weight:bold;background:#f8fafc;font-size:1.1rem;">${j.no}</td>
                         <td rowspan="2"><strong>${j.tgl}</strong></td>
-                        <td>07:30 - 08:30</td>
-                        <td>🕌 Shalat Dhuha & <strong>Mengaji</strong></td>
+                        <td>07:30-08:30</td>
+                        <td>🕌 Dhuha & <strong>Mengaji</strong></td>
                         <td>-</td>
-                        <td>${gNgaji}</td>
+                        <td>${formatGuru(guruNgaji)}</td>
                     </tr>
                     <tr>
-                        <td>08:30 - 10:00</td>
-                        <td>📖 Materi: <strong>${j.materi}</strong></td>
-                        <td>${gKelas}${gMapel}</td>
+                        <td>08:30-10:00</td>
+                        <td>📖 <strong>${j.materi}</strong></td>
+                        <td>${formatGuru(allMateri)}</td>
                         <td>-</td>
                     </tr>
                 `;
@@ -1444,149 +1013,68 @@
 
     function renderModul() {
         const container = document.getElementById('listModul');
-        let html = '';
-        
         const filterFase = document.getElementById('filterFase').value;
         const fasesToShow = filterFase === 'all' ? ['A', 'B', 'C'] : [filterFase];
         
+        let html = '';
         fasesToShow.forEach(fase => {
             const data = modulAjar[fase];
             const faseClass = fase === 'A' ? 'fase-a' : fase === 'B' ? 'fase-b' : 'fase-c';
             
             html += `<div class="modul-section">
                 <h3><span class="fase-badge ${faseClass}">${fase}</span> ${data.nama}</h3>
-                <p><strong>Tujuan Umum:</strong> ${data.tujuan}</p>`;
+                <p><strong>Tujuan:</strong> ${data.tujuan}</p>`;
             
-            Object.keys(data.materi).forEach(key => {
-                const m = data.materi[key];
+            Object.values(data.materi).forEach(m => {
                 html += `
-                <div class="modul-content" style="margin-top: 20px;">
-                    <h4>📚 ${m.judul}</h4>
-                    <p style="background: #dbeafe; padding: 8px 12px; border-radius: 6px; display: inline-block; margin-bottom: 15px;">
-                        <strong>📅 ${m.hari}</strong>
-                    </p>
-                    
-                    <h5>🎯 Tujuan Pembelajaran:</h5>
-                    <ul>
-                        ${m.tujuan.map(t => `<li>${t}</li>`).join('')}
-                    </ul>
-                    
-                    ${m.dalil ? `
-                    <h5>📖 Dalil:</h5>
-                    <div class="dalil-box">
-                        ${m.dalil.arab}
-                        <div class="dalil-arti">${m.dalil.arti}</div>
-                    </div>
-                    ` : ''}
-                    
-                    ${m.dalil2 ? `
-                    <div class="dalil-box">
-                        ${m.dalil2.arab}
-                        <div class="dalil-arti">${m.dalil2.arti}</div>
-                    </div>
-                    ` : ''}
-                    
-                    <h5>📝 Isi Materi:</h5>
-                    <ul>
-                        ${m.isi.map(i => `<li>${i}</li>`).join('')}
-                    </ul>
-                    
-                    ${m.aktivitas ? `
-                    <h5>🎮 Aktivitas Kelas:</h5>
-                    <ul>
-                        ${m.aktivitas.map(a => `<li>${a}</li>`).join('')}
-                    </ul>
-                    ` : ''}
-                    
-                    <h5>💡 Pesan Kunci:</h5>
-                    <p style="background: #ecfdf5; padding: 12px; border-radius: 8px; border-left: 4px solid var(--primary);">
-                        <strong>"${m.pesan}"</strong>
-                    </p>
-                    
-                    ${m.doa ? `
-                    <h5>🤲 Doa Penutup:</h5>
-                    <p style="background: #fef3c7; padding: 12px; border-radius: 8px; border-left: 4px solid #f59e0b; font-style: italic;">
-                        "${m.doa}"
-                    </p>
-                    ` : ''}
-                </div>`;
-            });
-            
-            html += `</div>`;
-        });
-        
-        container.innerHTML = html;
-    }
-
-    function filterModul() {
-        renderModul();
-    }
-
-    function downloadAllModul() {
-        // Create printable version
-        const filterFase = document.getElementById('filterFase').value;
-        const fasesToShow = filterFase === 'all' ? ['A', 'B', 'C'] : [filterFase];
-        
-        let printContent = `
-            <style>
-                body { font-family: 'Segoe UI', Tahoma, sans-serif; padding: 20px; line-height: 1.6; }
-                .modul-section { margin-bottom: 30px; page-break-inside: avoid; }
-                .modul-content { margin: 20px 0; padding: 15px; border: 1px solid #ddd; page-break-inside: avoid; }
-                .dalil-box { background: #f0f9ff; padding: 15px; margin: 10px 0; direction: rtl; text-align: right; font-size: 18px; line-height: 2; }
-                .dalil-arti { direction: ltr; text-align: left; font-style: italic; margin-top: 10px; font-size: 14px; }
-                .fase-badge { padding: 4px 10px; border-radius: 4px; color: white; font-weight: bold; }
-                .fase-a { background: #db2777; } .fase-b { background: #7c3aed; } .fase-c { background: #2563eb; }
-                h2, h3, h4 { color: #059669; }
-                h5 { color: #374151; margin: 15px 0 8px 0; }
-                ul { margin: 5px 0 15px 20px; }
-                .header-print { text-align: center; margin-bottom: 30px; border-bottom: 2px solid #059669; padding-bottom: 20px; }
-                @media print { .no-print { display: none; } }
-            </style>
-            <div class="header-print">
-                <h1>📿 MODUL AJAR PESANTREN RAMADHAN 1447 H</h1>
-                <p>SD Kabupaten Bandung | 05-13 Maret 2026 (Sabtu & Minggu Libur)</p>
-                <p>7 Hari Efektif Pembelajaran</p>
-            </div>
-        `;
-        
-        fasesToShow.forEach(fase => {
-            const data = modulAjar[fase];
-            printContent += `<div class="modul-section">
-                <h2><span class="fase-badge fase-${fase.toLowerCase()}">${fase}</span> ${data.nama}</h2>
-                <p><strong>Tujuan Umum:</strong> ${data.tujuan}</p>`;
-            
-            Object.keys(data.materi).forEach(key => {
-                const m = data.materi[key];
-                printContent += `
                 <div class="modul-content">
-                    <h3>📚 ${m.judul}</h3>
-                    <p><strong>📅 ${m.hari}</strong></p>
+                    <h4>📚 ${m.judul}</h4>
+                    <p style="background:#dbeafe;padding:6px 10px;border-radius:6px;display:inline-block;margin-bottom:10px;font-size:0.9rem;"><strong>📅 ${m.hari}</strong></p>
                     
-                    <h5>🎯 Tujuan Pembelajaran:</h5>
+                    <h5>🎯 Tujuan:</h5>
                     <ul>${m.tujuan.map(t => `<li>${t}</li>`).join('')}</ul>
                     
                     ${m.dalil ? `<h5>📖 Dalil:</h5><div class="dalil-box">${m.dalil.arab}<div class="dalil-arti">${m.dalil.arti}</div></div>` : ''}
-                    ${m.dalil2 ? `<div class="dalil-box">${m.dalil2.arab}<div class="dalil-arti">${m.dalil2.arti}</div></div>` : ''}
                     
                     <h5>📝 Isi Materi:</h5>
                     <ul>${m.isi.map(i => `<li>${i}</li>`).join('')}</ul>
                     
-                    ${m.aktivitas ? `<h5>🎮 Aktivitas Kelas:</h5><ul>${m.aktivitas.map(a => `<li>${a}</li>`).join('')}</ul>` : ''}
+                    ${m.aktivitas ? `<h5>🎮 Aktivitas:</h5><ul>${m.aktivitas.map(a => `<li>${a}</li>`).join('')}</ul>` : ''}
                     
-                    <h5>💡 Pesan Kunci:</h5>
-                    <p style="background: #ecfdf5; padding: 12px; border-left: 4px solid #059669;"><strong>"${m.pesan}"</strong></p>
+                    <h5>💡 Pesan:</h5>
+                    <p style="background:#ecfdf5;padding:10px;border-radius:6px;border-left:4px solid var(--primary);"><strong>"${m.pesan}"</strong></p>
                     
-                    ${m.doa ? `<h5>🤲 Doa Penutup:</h5><p style="background: #fef3c7; padding: 12px; border-left: 4px solid #f59e0b; font-style: italic;">"${m.doa}"</p>` : ''}
+                    ${m.doa ? `<h5>🤲 Doa:</h5><p style="background:#fef3c7;padding:10px;border-radius:6px;border-left:4px solid #f59e0b;font-style:italic;">"${m.doa}"</p>` : ''}
                 </div>`;
             });
-            
-            printContent += `</div><hr>`;
+            html += `</div>`;
         });
+        container.innerHTML = html;
+    }
+
+    function filterModul() { renderModul(); }
+
+    function downloadAllModul() {
+        const w = window.open('', '_blank');
+        w.document.write(`<style>body{font-family:sans-serif;padding:20px;line-height:1.6}.dalil-box{background:#f0f9ff;padding:15px;direction:rtl;text-align:right;font-size:18px;line-height:2;margin:10px 0}.dalil-arti{direction:ltr;text-align:left;font-style:italic;margin-top:10px}h2,h3,h4{color:#059669}@media print{.no-print{display:none}}</style>
+        <h1 style="text-align:center;">📿 MODUL AJAR PESANTREN RAMADHAN 1447 H</h1>
+        <p style="text-align:center;">SD Kabupaten Bandung | 05-13 Maret 2026</p><hr>`);
         
-        const printWindow = window.open('', '_blank');
-        printWindow.document.write(printContent);
-        printWindow.document.close();
-        printWindow.print();
+        ['A','B','C'].forEach(fase => {
+            const d = modulAjar[fase];
+            w.document.write(`<h2>${fase}. ${d.nama}</h2><p>${d.tujuan}</p>`);
+            Object.values(d.materi).forEach(m => {
+                w.document.write(`<h3>${m.judul}</h3><p><b>${m.hari}</b></p>
+                <p><b>Tujuan:</b></p><ul>${m.tujuan.map(t=>`<li>${t}</li>`).join('')}</ul>
+                ${m.dalil?`<div class="dalil-box">${m.dalil.arab}<div class="dalil-arti">${m.dalil.arti}</div></div>`:''}
+                <p><b>Materi:</b></p><ul>${m.isi.map(i=>`<li>${i}</li>`).join('')}</ul>
+                ${m.aktivitas?`<p><b>Aktivitas:</b></p><ul>${m.aktivitas.map(a=>`<li>${a}</li>`).join('')}</ul>`:''}
+                <p><b>Pesan:</b> "${m.pesan}"</p>
+                ${m.doa?`<p><b>Doa:</b> "${m.doa}"</p>`:''}<hr>`);
+            });
+        });
+        w.document.close();
+        w.print();
     }
 
     function showTab(id) {
@@ -1594,13 +1082,10 @@
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         document.getElementById(id).style.display = 'block';
         event.currentTarget.classList.add('active');
-        
-        if (id === 'modul') {
-            renderModul();
-        }
+        if (id === 'modul') renderModul();
     }
 
-    // ==================== INITIALIZATION ====================
+    // ==================== INIT ====================
     window.onload = () => {
         loadFromStorage();
         renderPetugas();
